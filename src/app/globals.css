@@ -1,2 +1,40 @@
 @import "tailwindcss";
 
+
+/* Font family */
+@font-face {
+  font-family: robotoBlack;
+  src: url('../../public/fonts/Roboto-Black.ttf') format("ttf");
+  font-family: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: robotoBold;
+  src: url('../../public/fonts/Roboto-Bold.ttf') format("ttf");
+  font-family: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: robotoMedium;
+  src: url('../../public/fonts/Roboto-Medium.ttf') format("ttf");
+  font-family: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: robotoRegular;
+  src: url('../../public/fonts/Roboto-Regular.ttf') format("ttf");
+  font-family: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* theme Tailwind  */
+@theme{
+  --font-robotoBlack : robotoBlack;
+  --font-robotBold: robotoBold;
+  --font-robotoMedium: robotoMedium;
+  --font-robotoRegular: robotoRegular;
+}
