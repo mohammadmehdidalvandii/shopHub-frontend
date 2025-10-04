@@ -47,12 +47,19 @@
   --color-danger:#f44336;
   --color-danger-dark:#993333;
   --color-border:#e6e6e6;
+  --color-text:#060618
 }
-
+/* layer base */
 @layer base {
   :root{
     --gradient-hero: linear-gradient(135deg , #3f51f4 , #7f8fff);
     --gradient-accent: linear-gradient(90deg ,#ff8c34 , #3f51f4,);
     --gradient-danger: linear-gradient(45deg ,#f44336 , #993333,);
+  }
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    @apply bg-white text-text font-robotBold
   }
 }
