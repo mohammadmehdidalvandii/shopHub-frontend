@@ -16,7 +16,7 @@ const Categories:React.FC = ()=>{
                         href={`/Products?category=${category.toLowerCase()}`}
                         className='group'
                     >
-                        <div className="bg-white rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300  border-border">
+                        <div className="bg-white rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 border  border-border">
                             <h3 className="text-xl font-robotBold font-bold group-hover:text-primary transition-colors">
                                 {category}
                             </h3>
