@@ -1,3 +1,4 @@
+import Footer from '@/components/modules/Footer/Footer'
 import Navigation from '@/components/modules/Navigation/Navigation'
 import Categories from '@/components/templates/home/Categories/Categories'
 import FeaturedProducts from '@/components/templates/home/FeaturedProducts/FeaturedProducts'
@@ -11,6 +12,7 @@ function Home(){
       <Header/>
       <FeaturedProducts/>
       <Categories/>
+      <Footer/>
     </div>
   )
 }
