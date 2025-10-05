@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { QueryProvider } from "@/providers/queryProvider";
-
+import { ToasterProvider } from "@/providers/toasterProvider";
 
 export const metadata: Metadata = {
   title: "ShopHub | Home",
@@ -19,6 +19,7 @@ export default function RootLayout({
         className={`antialiased`}
       >
         <QueryProvider>
+          <ToasterProvider/>
           {children}
         </QueryProvider>
       </body>
