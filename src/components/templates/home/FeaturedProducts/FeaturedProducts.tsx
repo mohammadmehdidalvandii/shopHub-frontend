@@ -1,4 +1,6 @@
 import ProductCard from '@/components/modules/ProductCard/ProductCard'
+import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
 import React from 'react'
 
 const FeaturedProducts:React.FC = ()=>{
@@ -13,6 +15,11 @@ const FeaturedProducts:React.FC = ()=>{
             <ProductCard/>
             <ProductCard/>
             <ProductCard/>
+        </div>
+        <div className="text-center">
+          <Link href='/Products'>
+          <Button size='lg' variant="outline">View All Products</Button>
+          </Link>
         </div>
     </section>
   )

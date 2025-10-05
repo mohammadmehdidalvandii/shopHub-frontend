@@ -10,7 +10,7 @@ const buttonVariants = cva(
         variant:{
             default:'bg-primary text-white hover:bg-primary/90 hover:scale-105 shadow-sm hover:shadow-lg active:scale-95',
             destructive:"bg-danger text-white  hover:bg-danger-dark hover:scale-105 shadow-sm hover:shadow-lg active:scale-95",
-            outline:"border-input bg-white hover:bg-accent hover:text-white hover:border-accent hover:scale-105 active:scale-95",
+            outline:"border border-border bg-white hover:bg-accent hover:text-white hover:border-accent hover:scale-105 active:scale-95",
             secondary:"bg-gray-dark text-white hover:bg-gray-dark/80 hover:scale-105 shadow-sm hover:shadow-md active:scale-95",
             ghost:"hover:bg-accent hover:text-white hover:scale-105 active:scale-95",
             link:"text-primary underline-offset-4 hover:underline hover:text-primary/80",
