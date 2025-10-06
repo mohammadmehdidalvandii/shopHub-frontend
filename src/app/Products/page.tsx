@@ -1,6 +1,7 @@
 import Navigation from "@/components/modules/Navigation/Navigation";
 import React from 'react';
 import type { Metadata } from "next";
+import Products from "@/components/templates/products/Products";
 
  export const metadata: Metadata = {
   title: "ShopHub | Products",
@@ -11,7 +12,7 @@ const page:React.FC = ()=>{
   return (
     <div className="min-h-screen bg-white">
         <Navigation/>
-        products -page
+        <Products/>
     </div>
   )
 }
