@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from "next";
 import Navigation from '@/components/modules/Navigation/Navigation';
 import Footer from '@/components/modules/Footer/Footer';
+import ContentAbout from '@/components/templates/about/ContentAbout';
 
  export const metadata: Metadata = {
   title: "ShopHub | About Us",
@@ -12,7 +13,7 @@ const page:React.FC = ()=>{
   return (
     <div className="min-h-screen px-4 bg-white">
         <Navigation/>
-        this is About us 
+        <ContentAbout/>
         <Footer/>
     </div>
   )
