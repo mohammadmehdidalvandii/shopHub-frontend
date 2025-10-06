@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Navigation from '@/components/modules/Navigation/Navigation';
 import Footer from '@/components/modules/Footer/Footer';
 import ContactHeader from '@/components/templates/contact/ContactHeader/ContactHeader';
+import ContactForm from '@/components/templates/contact/ContactForm/ContactForm';
 
 
  export const metadata: Metadata = {
@@ -15,6 +16,7 @@ const page:React.FC = ()=>{
     <div className="min-h-screen px-4 bg-white">
         <Navigation/>
         <ContactHeader/>
+        <ContactForm/>
         <Footer/>
     </div>
   )
