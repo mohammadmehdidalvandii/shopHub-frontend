@@ -2,10 +2,14 @@ import React from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductInfo from '../ProductInfo/ProductInfo';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
+import ProductNotFound from '../ProductNotFound/ProductNotFound';
 
 const ProductDetails:React.FC = ()=>{
   return (
     <section>
+        {/* Product not found  */}
+         {/* <ProductNotFound/> */}
+        {/* Product not found  */}
         <div className="container mx-auto px-4 py-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
                 {/* Product Image */}
@@ -22,7 +26,7 @@ const ProductDetails:React.FC = ()=>{
                 </TabsList>
                 <TabsContent value='description'>
                     <h3 className="text-2xl font-robotBold font-bold mb-4">Product Description</h3>
-                    <p className="text-gray-medium leading-relaxed text-lg">Stay connected with the latest smart watch technology. Track your fitness, monitor your health, and stay in touch with notifications right on your wrist</p>
+                    <p className="text-gray-medium leading-relaxed">Stay connected with the latest smart watch technology. Track your fitness, monitor your health, and stay in touch with notifications right on your wrist</p>
                 </TabsContent>
                 <TabsContent value='specifications'>
                     <h3 className="text-2xl font-robotBold font-bold mb-4">Technical Specifications</h3>
