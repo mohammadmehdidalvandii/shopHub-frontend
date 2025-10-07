@@ -2,6 +2,7 @@ import Footer from '@/components/modules/Footer/Footer';
 import Navigation from '@/components/modules/Navigation/Navigation';
 import React from 'react';
 import type { Metadata } from "next";
+import Basket from '@/components/templates/cart/Basket/Basket';
 
 
  export const metadata: Metadata = {
@@ -13,7 +14,7 @@ const page:React.FC = ()=>{
   return (
     <div className="min-h-screen bg-white">
         <Navigation/>
-        this cart page
+        <Basket/>
         <Footer/>
     </div>
   )
