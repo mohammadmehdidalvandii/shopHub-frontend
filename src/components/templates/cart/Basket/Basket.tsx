@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { showSuccess } from '@/utils/Toasts';
 import Link from 'next/link';
+import EmptyCart from '../EmptyCart/EmptyCart';
 
 const Basket:React.FC = ()=>{
   return (
@@ -15,6 +16,9 @@ const Basket:React.FC = ()=>{
             <h1 className="text-4xl font-robotoBold font-bold mb-8">Shopping Cart</h1>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
                 <div className="col-span-2 space-y-4">
+                    {/* Products length is empty */}
+                    {/* <EmptyCart/> */}
+                    {/* Products length is empty */}
                     <Card >
                         <CardContent className='p-6'>
                             <div className="flex gap-6">
