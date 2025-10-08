@@ -1,0 +1,58 @@
+"use client"
+import React, { useState } from 'react';
+import Navigation from '../modules/Navigation/Navigation';
+import { QueryProvider } from '@/providers/queryProvider';
+import { ToasterProvider } from '@/providers/toasterProvider';
+import SidebarAdmin from '../modules/SidebarAdmin/SidebarAdmin';
+import { LogOut, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Button } from '../ui/Button';
+
+
+interface AdminLayoutProps{
+    children:React.ReactNode;
+}
+
+export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
+    const [sidebarOpen , setSidebarOpen] = useState<boolean>(true)
+  return (
+    <div className="min-h-screen bg-white">
+        <Navigation/>
+        <QueryProvider>
+            <ToasterProvider/>
+            <div className="flex">
+                <div className={` ${sidebarOpen ? 'w-54 ' : 'w-10'}`}>
+                    <SidebarAdmin/>
+                </div>
+                <div className='flex-1 flex-col'>
+                    <div className="flex flex-1 justify-between border-b border-b-input px-4 py-1">
+                        <Button variant='outline' size='icon'
+                        onClick={()=>setSidebarOpen(!sidebarOpen)}
+                        >   
+                        {sidebarOpen ? (
+                            <PanelLeftClose/>
+                        ) :(
+                            <PanelLeftOpen/>
+                        )}
+                        </Button>
+                        <div className='flex items-center gap-2'>
+                            <span className="text-gray-medium text-2xl">welcome back admin</span>
+                        <Button
+                         variant='outline'
+                         size='sm'
+                         >
+                            <LogOut className='h-4 w-4'/>
+                            Logout
+                         </Button>
+                        </div>
+                    </div>
+                    <main className="flex-1 p-6">
+                        {children}
+                    </main>
+                </div>
+            </div>
+        </QueryProvider>
+    </div>
+  )
+}
+
+export default AdminLayout
