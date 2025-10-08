@@ -20,11 +20,11 @@ export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
         <QueryProvider>
             <ToasterProvider/>
             <div className="flex">
-                <div className={` ${sidebarOpen ? 'w-54 ' : 'w-10'}`}>
-                    <SidebarAdmin/>
+                <div className={` transition-all duration-300  ${sidebarOpen ? 'w-54 fixed' : 'w-12 overflow-hidden'}`}>
+                    <SidebarAdmin text={sidebarOpen? true :false}/>
                 </div>
-                <div className='flex-1 flex-col'>
-                    <div className="flex flex-1 justify-between border-b border-b-input px-4 py-1">
+                <div className={`flex-1 ${sidebarOpen ? 'ml-[220px]':'ml-0'}`}>
+                    <div className="flex flex-1 justify-between border-b border-b-input px-4 py-1 ">
                         <Button variant='outline' size='icon'
                         onClick={()=>setSidebarOpen(!sidebarOpen)}
                         >   
