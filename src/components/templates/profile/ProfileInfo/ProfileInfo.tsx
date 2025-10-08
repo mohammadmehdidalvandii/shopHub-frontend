@@ -45,7 +45,7 @@ const ProfileInfo:React.FC = ()=>{
                         <Input id='address' defaultValue='123 Main St, New York , NY 10001'/>
                     </div>
             </form>
-            <Button type='submit' variant='accent'>Save Change</Button>
+            <Button type='submit' variant='accent' size='sm' className='mt-4'>Save Change</Button>
         </CardContent>
     </Card>
   )
