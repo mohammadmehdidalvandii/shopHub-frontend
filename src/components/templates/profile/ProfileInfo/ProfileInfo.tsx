@@ -18,7 +18,7 @@ const ProfileInfo:React.FC = ()=>{
                     <User className='h-10 w-10 text-primary'/>
                     </div>
                     <div>
-                        <Button variant='default'>Upload Photo</Button>
+                        <Button variant='default' size='lg'>Upload Photo</Button>
                         <p className="text-lg text-gray-medium mt-2">JPG, PNG or GIF (max. 2MB)</p>
                     </div>
                 </div>
