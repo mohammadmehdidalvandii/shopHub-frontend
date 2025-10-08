@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from "next";
 import Navigation from '@/components/modules/Navigation/Navigation';
 import ProfileHeader from '@/components/templates/profile/ProfileHeader/ProfileHeader';
+import ProfileTabs from '@/components/templates/profile/ProfileTabs/ProfileTabs';
 
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ const page:React.FC = ()=>{
     <div className="min-h-screen bg-white">
         <Navigation/>
         <ProfileHeader/>
-        this is profile user
+        <ProfileTabs/>
     </div>
   )
 }
