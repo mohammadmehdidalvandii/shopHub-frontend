@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import AdminLayout from '@/components/layout/AdminLayout';
 import ProductsHeader from '@/components/templates/admin/products/ProductsHeader/ProductsHeader';
 import ProductsStats from '@/components/templates/admin/products/ProductsStats/ProductsStats';
+import ProductList from '@/components/templates/admin/products/ProductList/ProductList';
 
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ function page() {
     <AdminLayout>
         <ProductsHeader/>
         <ProductsStats/>
+        <ProductList/>
     </AdminLayout>
   )
 }
