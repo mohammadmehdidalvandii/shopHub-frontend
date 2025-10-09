@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import AdminLayout from '@/components/layout/AdminLayout';
 import OrdersHeader from '@/components/templates/admin/orders/OrdersHeader/OrdersHeader';
 import OrdersStats from '@/components/templates/admin/orders/OrdersStats/OrdersStats';
+import OrderList from '@/components/templates/admin/orders/OrderList/OrderList';
 
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ const page:React.FC = ()=>{
     <AdminLayout>
         <OrdersHeader/>
         <OrdersStats/>
-        this orders admin 
+        <OrderList/>
     </AdminLayout>
   )
 }
