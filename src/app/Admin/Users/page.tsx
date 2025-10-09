@@ -1,6 +1,8 @@
 import AdminLayout from '@/components/layout/AdminLayout';
 import React from 'react';
 import type { Metadata } from "next";
+import UsersHeader from '@/components/templates/admin/users/UsersHeader/UsersHeader';
+import UsersStats from '@/components/templates/admin/users/UsersStats/UsersStats';
 
 
 export const metadata: Metadata = {
@@ -11,6 +13,8 @@ export const metadata: Metadata = {
 const page:React.FC  = ()=>{
   return (
     <AdminLayout>
+        <UsersHeader/>
+        <UsersStats/>
         this users page admin
     </AdminLayout>
   )
