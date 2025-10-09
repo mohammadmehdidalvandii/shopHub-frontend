@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from "next";
 import AdminLayout from '@/components/layout/AdminLayout';
 import OrdersHeader from '@/components/templates/admin/orders/OrdersHeader/OrdersHeader';
+import OrdersStats from '@/components/templates/admin/orders/OrdersStats/OrdersStats';
 
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ const page:React.FC = ()=>{
   return (
     <AdminLayout>
         <OrdersHeader/>
+        <OrdersStats/>
         this orders admin 
     </AdminLayout>
   )
