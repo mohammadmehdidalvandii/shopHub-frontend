@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Metadata } from "next";
 import AdminLayout from '@/components/layout/AdminLayout';
+import OrdersHeader from '@/components/templates/admin/orders/OrdersHeader/OrdersHeader';
 
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const page:React.FC = ()=>{
   return (
     <AdminLayout>
+        <OrdersHeader/>
         this orders admin 
     </AdminLayout>
   )
