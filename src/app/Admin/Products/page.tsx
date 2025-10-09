@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from "next";
 import AdminLayout from '@/components/layout/AdminLayout';
 import ProductsHeader from '@/components/templates/admin/products/ProductsHeader/ProductsHeader';
+import ProductsStats from '@/components/templates/admin/products/ProductsStats/ProductsStats';
 
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ function page() {
   return (
     <AdminLayout>
         <ProductsHeader/>
-        this is admin - products
+        <ProductsStats/>
     </AdminLayout>
   )
 }
