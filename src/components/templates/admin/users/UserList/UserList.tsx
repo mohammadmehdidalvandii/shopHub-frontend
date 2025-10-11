@@ -4,13 +4,17 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
-import { Edit, Search, Trash2 } from 'lucide-react';
+import { Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
 const EditUserModel = dynamic(()=>import('@/components/models/EditUserModel'),{
     ssr:false,
-    loading:()=> <p>Loading</p>
+    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+})
+const DeleteUserModel = dynamic(()=>import('@/components/models/DeleteUserModel'),{
+    ssr:false,
+    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
 })
 
 const UserList:React.FC = ()=>{
@@ -85,99 +89,12 @@ const UserList:React.FC = ()=>{
                                         <Button variant='outline' size='sm'>
                                             Suspend
                                         </Button>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
+                                        <DeleteUserModel/>
                                     </div>
                             </div>
                         </CardContent>
                     </Card>
-                    <Card>
-                        <CardContent className='p-6'>
-                            <div className="flex items-start justify-between">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                            <span className="text-primary font-bold font-robotoBold text-xl">
-                                                j
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p className="font-robotoBold text-xl">user name</p>
-                                            <p className="text-lg text-gray-medium">user@gmail.com</p>
-                                        </div>
-                                        <Badge variant='default'>Admin</Badge>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
-                                        <div>
-                                            <p className="text-gray-medium">Join Date</p>
-                                            <p className="font-semibold">12/2/2024</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium">Total Order</p>
-                                            <p className="font-semibold">123 orders</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium">Total Spent</p>
-                                            <p className="font-semibold">$8,765.82</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div className="flex gap-2">
-                                        <EditUserModel/>
-                                        <Button variant='outline' size='sm'>
-                                            Suspend
-                                        </Button>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
-                                    </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardContent className='p-6'>
-                            <div className="flex items-start justify-between">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                            <span className="text-primary font-bold font-robotoBold text-xl">
-                                                j
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <p className="font-robotoBold text-xl">user name</p>
-                                            <p className="text-lg text-gray-medium">user@gmail.com</p>
-                                        </div>
-                                        <Badge variant='default'>Admin</Badge>
-                                    </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
-                                        <div>
-                                            <p className="text-gray-medium">Join Date</p>
-                                            <p className="font-semibold">12/2/2024</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium">Total Order</p>
-                                            <p className="font-semibold">123 orders</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium">Total Spent</p>
-                                            <p className="font-semibold">$8,765.82</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div className="flex gap-2">
-                                        <EditUserModel/>
-                                        <Button variant='outline' size='sm'>
-                                            Suspend
-                                        </Button>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
-                                    </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+
                 </div>
             </CardContent>
         </Card>
