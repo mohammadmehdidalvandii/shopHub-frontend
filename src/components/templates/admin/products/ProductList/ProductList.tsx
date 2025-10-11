@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardContent } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
@@ -7,7 +8,16 @@ import React from 'react';
 import Product from '../../../../../../public/assets/images/product.png'
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import EditProductModel from '@/components/models/EditProductModel';
+import dynamic from 'next/dynamic';
+
+const EditProductModel = dynamic(()=>import('@/components/models/EditProductModel'),{
+    ssr:false,
+    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+})
+const DeleteProductModel = dynamic(()=>import('@/components/models/DeleteProductModel'),{
+    ssr:false,
+    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+})
 
 const ProductList:React.FC = ()=>{
   return (
@@ -61,9 +71,7 @@ const ProductList:React.FC = ()=>{
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
                                         <EditProductModel/>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
+                                        <DeleteProductModel/>
                                     </div>
                             </div>
                         </CardContent>
