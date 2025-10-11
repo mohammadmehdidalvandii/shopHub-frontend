@@ -1,10 +1,17 @@
+"use client"
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Edit, Search, Trash2 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import React from 'react';
+
+const EditUserModel = dynamic(()=>import('@/components/models/EditUserModel'),{
+    ssr:false,
+    loading:()=> <p>Loading</p>
+})
 
 const UserList:React.FC = ()=>{
   return (
@@ -74,9 +81,7 @@ const UserList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditUserModel/>
                                         <Button variant='outline' size='sm'>
                                             Suspend
                                         </Button>
@@ -119,9 +124,7 @@ const UserList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditUserModel/>
                                         <Button variant='outline' size='sm'>
                                             Suspend
                                         </Button>
@@ -164,9 +167,7 @@ const UserList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditUserModel/>
                                         <Button variant='outline' size='sm'>
                                             Suspend
                                         </Button>
