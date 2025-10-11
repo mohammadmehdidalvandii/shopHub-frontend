@@ -1,6 +1,13 @@
+"use client"
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const AddProductModel = dynamic(()=>import('@/components/models/AddProductModel'),{
+  ssr:false,
+  loading:()=><p>Loading</p>
+})
 
 const ProductsHeader: React.FC = () => {
   return (
@@ -14,10 +21,11 @@ const ProductsHeader: React.FC = () => {
             Manage your product inventory
           </p>
         </div>
-        <Button variant="default" size="lg">
+        {/* <Button variant="default" size="lg">
           <Plus className="mr-2 h-4 w-4" />
           Add Product
-        </Button>
+        </Button> */}
+        <AddProductModel/>
       </div>
     </div>
   );
