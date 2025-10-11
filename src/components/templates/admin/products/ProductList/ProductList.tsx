@@ -7,6 +7,7 @@ import React from 'react';
 import Product from '../../../../../../public/assets/images/product.png'
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import EditProductModel from '@/components/models/EditProductModel';
 
 const ProductList:React.FC = ()=>{
   return (
@@ -59,9 +60,7 @@ const ProductList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditProductModel/>
                                         <Button variant='outline' size='icon'>
                                             <Trash2 className='h-4 w-4'/>
                                         </Button>
@@ -96,9 +95,7 @@ const ProductList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditProductModel/>
                                         <Button variant='outline' size='icon'>
                                             <Trash2 className='h-4 w-4'/>
                                         </Button>
@@ -133,9 +130,7 @@ const ProductList:React.FC = ()=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
-                                        <Button variant='outline' size='icon'>
-                                            <Edit className='h-4 w-4'/>
-                                        </Button>
+                                        <EditProductModel/>
                                         <Button variant='outline' size='icon'>
                                             <Trash2 className='h-4 w-4'/>
                                         </Button>
@@ -143,6 +138,7 @@ const ProductList:React.FC = ()=>{
                             </div>
                         </CardContent>
                     </Card>
+
                 </div>
             </CardContent>
         </Card>
