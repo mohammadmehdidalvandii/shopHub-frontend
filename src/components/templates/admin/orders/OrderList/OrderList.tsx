@@ -21,7 +21,7 @@ const OrderList:React.FC = ()=>{
                     </div>
                     <Select defaultValue='all'>
                         <SelectTrigger className='w-full md:w-[180px]'>
-                            <SelectValue placeholder='Filter by status'/>
+                            <SelectValue placeholder='Filter by status' className='font-robotBold font-bold'/>
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value='all'>All Orders</SelectItem>
