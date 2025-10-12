@@ -12,11 +12,11 @@ import dynamic from 'next/dynamic';
 
 const EditProductModel = dynamic(()=>import('@/components/models/EditProductModel'),{
     ssr:false,
-    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+    loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 const DeleteProductModel = dynamic(()=>import('@/components/models/DeleteProductModel'),{
     ssr:false,
-    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+    loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 
 const ProductList:React.FC = ()=>{

@@ -6,7 +6,7 @@ import React from "react";
 
 const AddProductModel = dynamic(()=>import('@/components/models/AddProductModel'),{
   ssr:false,
-  loading:()=><p>Loading</p>
+  loading:()=> <Button variant="ghost" size="lg" className="text-blue-700"> Loading </Button>
 })
 
 const ProductsHeader: React.FC = () => {
@@ -21,10 +21,6 @@ const ProductsHeader: React.FC = () => {
             Manage your product inventory
           </p>
         </div>
-        {/* <Button variant="default" size="lg">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Product
-        </Button> */}
         <AddProductModel/>
       </div>
     </div>

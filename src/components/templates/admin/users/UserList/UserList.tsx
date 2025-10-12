@@ -10,11 +10,11 @@ import React from 'react';
 
 const EditUserModel = dynamic(()=>import('@/components/models/EditUserModel'),{
     ssr:false,
-    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+    loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 const DeleteUserModel = dynamic(()=>import('@/components/models/DeleteUserModel'),{
     ssr:false,
-    loading:()=> <Button variant='outline' size='sm'>Loading</Button>
+    loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 
 const UserList:React.FC = ()=>{
