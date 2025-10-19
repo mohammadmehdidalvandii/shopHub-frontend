@@ -1,6 +1,11 @@
+import { useAuthStore } from "@/store/authStore";
 import { useMutation } from "@tanstack/react-query";
 const API_URL = 'http://localhost:3000/api/auth/';
 
+interface LoginFormData {
+    email:string,
+    password:string,
+}
 
 interface RegisterFormData {
   firstName: string;
@@ -29,6 +34,41 @@ export const useRegisterMutation = ()=>{
             };
 
             return res.json();
+        }
+    })
+};
+
+
+export const useLoginMutation = ()=>{
+      const authStore:unknown = useAuthStore()
+    return useMutation({
+        mutationFn: async (formData:LoginFormData)=>{
+            const res = await fetch(`${API_URL}login`,{
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(formData),
+            });
+
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Login failed');
+            };
+            const data = await res.json();
+            const token = data.data.accessToken;
+
+            const userRes = await fetch(`${API_URL}profile`,{
+                headers:{Authorization :`Bearer ${token}`},
+            });
+
+            if(!userRes.ok){
+                throw new Error('Failed to fetch user info');
+            };
+
+            const user = await userRes.json();
+
+            authStore.login(token , user)
+
+            return user;
         }
     })
 }
