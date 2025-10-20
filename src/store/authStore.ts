@@ -11,18 +11,22 @@ interface User{
 };
 interface AuthState {
   token: string | null;
+  accessTokenExpiry:string|null;
   user: User | null;
   isAuthenticated: boolean ;
   login: (token: string, user: User) => void;
-//   logout: () => void;
+  logout: () =>Promise<void>;
 }
 export const useAuthStore = create<AuthState>((set)=>({
-    token:localStorage.getItem('token')|| null,
+    token:typeof window !== 'undefined' ? localStorage.getItem('token'): null,
+    accessTokenExpiry:typeof window !== 'undefined' ? localStorage.getItem('accessTokenExpiry'): null,
     user:null,
     isAuthenticated:!!localStorage.getItem('token'),
-
     login:(token:string , user:User)=>{
         localStorage.setItem('token', token);
+        localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
         set({token , user , isAuthenticated:true})
-    }
+    },
+
+    logout:async ()=>{}
 })) 
