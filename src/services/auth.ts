@@ -40,7 +40,7 @@ export const useRegisterMutation = ()=>{
 
 
 export const useLoginMutation = ()=>{
-      const authStore:unknown = useAuthStore()
+      const authStore = useAuthStore()
     return useMutation({
         mutationFn: async (formData:LoginFormData)=>{
             const res = await fetch(`${API_URL}login`,{
