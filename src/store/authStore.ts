@@ -21,12 +21,16 @@ export const useAuthStore = create<AuthState>((set)=>({
     token:typeof window !== 'undefined' ? localStorage.getItem('token'): null,
     accessTokenExpiry:typeof window !== 'undefined' ? localStorage.getItem('accessTokenExpiry'): null,
     user:null,
-    isAuthenticated:!!localStorage.getItem('token'),
+    isAuthenticated:typeof window !== 'undefined' && !!localStorage.getItem('token'),
     login:(token:string , user:User)=>{
         localStorage.setItem('token', token);
         localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
         set({token , user , isAuthenticated:true})
     },
 
-    logout:async ()=>{}
+    logout:async ()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('accessTokenExpiry');
+        set({token:null , accessTokenExpiry:null ,  user:null , isAuthenticated:false})
+    }
 })) 

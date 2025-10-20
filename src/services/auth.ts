@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/store/authStore";
+import { showSuccess } from "@/utils/Toasts";
 import { useMutation } from "@tanstack/react-query";
 const API_URL = 'http://localhost:3000/api/auth/';
 
@@ -72,4 +73,24 @@ export const useLoginMutation = ()=>{
             return user;
         }
     })
-}
+};
+
+export const useLogoutMutation = ()=>{
+    const authStore = useAuthStore();
+    return useMutation({
+        mutationFn: async ()=>{
+            const res = await fetch(`${API_URL}logout`,{
+                method:'POST',
+                credentials:'include',
+            });
+            if(res.ok){
+               authStore.logout(); 
+               return true
+            }
+        },
+        onSuccess: ()=>{
+            showSuccess('Logout successfully')
+        }
+        
+    })
+} 

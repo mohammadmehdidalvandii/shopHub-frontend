@@ -6,6 +6,7 @@ import { ToasterProvider } from '@/providers/toasterProvider';
 import SidebarAdmin from '../modules/SidebarAdmin/SidebarAdmin';
 import { LogOut, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { useLogoutMutation } from '@/services/auth';
 
 
 interface AdminLayoutProps{
@@ -13,7 +14,14 @@ interface AdminLayoutProps{
 }
 
 export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
-    const [sidebarOpen , setSidebarOpen] = useState<boolean>(true)
+    const logoutMutation = useLogoutMutation()
+    const [sidebarOpen , setSidebarOpen] = useState<boolean>(true);
+
+
+    const handlerLogout:React.MouseEventHandler = ()=>{
+        logoutMutation.mutate()
+    }
+
   return (
     <div className="min-h-screen bg-white">
         <Navigation/>
@@ -39,6 +47,7 @@ export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
                         <Button
                          variant='outline'
                          size='sm'
+                         onClick={handlerLogout}
                          >
                             <LogOut className='h-4 w-4'/>
                             Logout
