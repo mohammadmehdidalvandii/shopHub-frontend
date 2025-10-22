@@ -21,8 +21,8 @@ const Login:React.FC = ()=>{
     e.preventDefault();
     loginMutation.mutate(formData,{
       onSuccess:(data)=>{
-        console.log("data f =>", data)
-        showSuccess(`Welcome ${'ad'}`)
+        showSuccess(`Welcome ${data.firstName}-${data.lastName}`);
+        window.location.replace('/')
       },
       onError:(error:any)=>{
         showError(error.message || 'Login failed')

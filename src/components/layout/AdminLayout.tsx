@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../modules/Navigation/Navigation';
 import { QueryProvider } from '@/providers/queryProvider';
 import { ToasterProvider } from '@/providers/toasterProvider';
@@ -7,6 +7,8 @@ import SidebarAdmin from '../modules/SidebarAdmin/SidebarAdmin';
 import { LogOut, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useLogoutMutation } from '@/services/auth';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'next/navigation';
 
 
 interface AdminLayoutProps{
@@ -16,7 +18,14 @@ interface AdminLayoutProps{
 export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
     const logoutMutation = useLogoutMutation()
     const [sidebarOpen , setSidebarOpen] = useState<boolean>(true);
-
+    const router = useRouter()
+    const {token , user} = useAuthStore();
+    
+    useEffect(()=>{
+        if(!token && user?.role !== 'ADMIN'){
+            router.push('/Auth')
+        }
+    },[token, user , router])
 
     const handlerLogout:React.MouseEventHandler = ()=>{
         logoutMutation.mutate()

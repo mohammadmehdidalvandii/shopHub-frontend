@@ -68,9 +68,9 @@ export const useLoginMutation = ()=>{
 
             const user = await userRes.json();
 
-            authStore.login(token , user)
+            authStore.login(token , user.data)
 
-            return user;
+            return user.data;
         }
     })
 };
@@ -109,4 +109,15 @@ export  const getToken = ()=>{
     }; 
 
     return token
+};
+
+export const getUserInfo = ()=>{
+    const authStore = useAuthStore();
+    const user = authStore.user;
+
+    if(!user){
+        return null;
+    };
+
+    return user
 }
