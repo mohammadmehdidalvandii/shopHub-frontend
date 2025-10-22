@@ -96,8 +96,6 @@ export const useLogoutMutation = ()=>{
 } 
 
 export  const getToken = ()=>{
-    // const token = !!localStorage.getItem('token');
-    // const expiry =  !!localStorage.getItem('accessTokenExpiry');
     const authStore = useAuthStore()
     const token = authStore.token;
     const expiry = authStore.accessTokenExpiry;
