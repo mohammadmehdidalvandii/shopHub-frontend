@@ -4,9 +4,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import React, { useState } from 'react';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import { getToken } from '@/services/auth';
+import { redirect } from 'next/navigation';
 
 const LoginOrRegister:React.FC = ()=>{
+    
     const [activeTab , setActiveTab] = useState<string>('login');
+
+    const token = getToken();
+    if(token){
+        redirect('/')
+    }
+
   return (
     <section>
         <Card className='w-full max-w-md flex-1 items-center justify-center mx-auto py-4 my-16'>
