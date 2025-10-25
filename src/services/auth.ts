@@ -112,12 +112,43 @@ export  const getToken = ()=>{
 };
 
 export const getUserInfo = ()=>{
-    const authStore = useAuthStore();
-    const user = authStore.user;
+    const {user} = useAuthStore();
 
     if(!user){
         return null;
     };
 
     return user
-}
+};
+
+export const refreshToken = async () =>{
+    const res = await fetch(`${API_URL}refresh-token`,{
+        method:"POST",
+        credentials:"include",
+    });
+    if(!res.ok){
+         const {logout} = useAuthStore();
+         logout();
+        return null
+    };
+
+    const data = await res.json();
+    console.log("data=>", data)
+    localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
+
+    return data.accessToken
+};
+
+export const getValidToken = async ()=>{
+    let token = getToken();
+     if(token) return token;
+
+     token = await refreshToken();
+     return token
+};
+
+
+
+
+

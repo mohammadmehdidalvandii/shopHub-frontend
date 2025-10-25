@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { QueryProvider } from "@/providers/queryProvider";
 import { ToasterProvider } from "@/providers/toasterProvider";
+import { AuthRefresher } from "@/providers/authRefresher";
 
 export const metadata: Metadata = {
   title: "ShopHub | Home",
@@ -20,6 +21,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <ToasterProvider/>
+          <AuthRefresher/>
           {children}
         </QueryProvider>
       </body>
