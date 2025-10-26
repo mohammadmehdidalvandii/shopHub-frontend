@@ -1,11 +1,15 @@
+"use client"
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
+import { useAuthStore } from '@/store/authStore';
 import { User } from 'lucide-react';
 import React from 'react';
 
 const ProfileInfo:React.FC = ()=>{
+    const {user} = useAuthStore();
+    console.log("user =>" , user) 
   return (
     <Card>
         <CardHeader>
@@ -25,24 +29,20 @@ const ProfileInfo:React.FC = ()=>{
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor='firstName'>First Name</Label>
-                        <Input id='firstName' defaultValue='John'/>
+                        <Input id='firstName' defaultValue={user?.firstName}/>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor='lastName'>Last Name</Label>
-                        <Input id='lastName' defaultValue='Doe'/>
+                        <Input id='lastName' defaultValue={user?.lastName}/>
                     </div>
                 </div>
                     <div className="space-y-2">
                         <Label htmlFor='email'>Email</Label>
-                        <Input id='email' defaultValue='JohnDoe@example.com'/>
+                        <Input id='email' defaultValue={user?.email}/>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor='phone'>Phone Number</Label>
-                        <Input id='phone' defaultValue='+1 (555) 123-4567'/>
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor='address'>Address</Label>
-                        <Input id='address' defaultValue='123 Main St, New York , NY 10001'/>
+                        <Input id='phone' defaultValue={user?.phone}/>
                     </div>
             </form>
             <Button type='submit' variant='accent' size='sm' className='mt-4'>Save Change</Button>
