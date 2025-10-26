@@ -16,6 +16,7 @@ interface AuthState {
   isAuthenticated: boolean ;
   login: (token: string, user: User) => void;
   logout: () =>Promise<void>;
+  updateUser:(data:User)=>void;
 }
 export const useAuthStore = create<AuthState>((set)=>({
     token:typeof window !== 'undefined' ? localStorage.getItem('token'): null,
@@ -34,5 +35,12 @@ export const useAuthStore = create<AuthState>((set)=>({
         localStorage.removeItem('accessTokenExpiry');
         localStorage.removeItem('userInfo');
         set({token:null , accessTokenExpiry:null ,  user:null , isAuthenticated:false})
+    },
+    updateUser:(data: Partial<User>)=>{
+        set((state)=>{
+            const updatedUser = {...state.user , ...data} as User;
+            localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+            return {user:updatedUser}
+        });
     }
 })) 
