@@ -96,15 +96,12 @@ export const useLogoutMutation = ()=>{
 } 
 
 export  const getToken = ()=>{
-    const authStore = useAuthStore()
-    const token = authStore.token;
-    const expiry = authStore.accessTokenExpiry;
+    const {token , accessTokenExpiry} = useAuthStore()
 
-
-    if(!token || !expiry){
+    if(!token || !accessTokenExpiry){
         return null
     };
-    if(Date.now() >= Number(expiry)){
+    if(Date.now() >= Number(accessTokenExpiry)){
         return null
     }; 
 
