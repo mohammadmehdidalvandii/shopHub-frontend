@@ -1,12 +1,19 @@
 "use client"
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
-import { Card, CardContent } from '@/components/ui/Cart';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import React from 'react';
+import { UserProps } from '@/types/users';
+
+interface userList {
+    users:UserProps[],
+    error:boolean,
+    loading:boolean,
+}
 
 const EditUserModel = dynamic(()=>import('@/components/models/EditUserModel'),{
     ssr:false,
@@ -17,7 +24,18 @@ const DeleteUserModel = dynamic(()=>import('@/components/models/DeleteUserModel'
     loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 
-const UserList:React.FC = ()=>{
+
+
+const UserList:React.FC<userList> = ({users , error , loading})=>{
+    console.log("user =>", users)
+
+    if(loading){
+        return <p>Loading...</p>
+    };
+     if(error){
+        return <p>Failed to load orders</p>
+    };
+
   return (
     <div className="container mx-auto">
         <Card>
@@ -53,21 +71,22 @@ const UserList:React.FC = ()=>{
                     </Select>
                 </div>
                 <div className="space-y-4">
-                    <Card>
+                    {users.map((user)=>(
+                    <Card key={user._id}>
                         <CardContent className='p-6'>
                             <div className="flex items-start justify-between">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-3">
                                         <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                                             <span className="text-primary font-bold font-robotoBold text-xl">
-                                                j
+                                                {user.firstName[0]}{user.lastName[0]}
                                             </span>
                                         </div>
                                         <div>
-                                            <p className="font-robotoBold text-xl">user name</p>
-                                            <p className="text-lg text-gray-medium">user@gmail.com</p>
+                                            <p className="font-robotoBold text-xl">{user.firstName} {user.lastName}</p>
+                                            <p className="text-lg text-gray-medium">{user.email}</p>
                                         </div>
-                                        <Badge variant='default'>Admin</Badge>
+                                        <Badge variant='default'>{user.role}</Badge>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
                                         <div>
@@ -94,7 +113,7 @@ const UserList:React.FC = ()=>{
                             </div>
                         </CardContent>
                     </Card>
-
+                    ))}
                 </div>
             </CardContent>
         </Card>
