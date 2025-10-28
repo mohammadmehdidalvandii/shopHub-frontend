@@ -96,7 +96,9 @@ export const useLogoutMutation = ()=>{
 } 
 
 export  const getToken = ()=>{
-    const {token , accessTokenExpiry} = useAuthStore()
+    const authStore= useAuthStore.getState()
+    const token = authStore.token;
+    const accessTokenExpiry = authStore.accessTokenExpiry; 
 
     if(!token || !accessTokenExpiry){
         return null
