@@ -132,7 +132,6 @@ export const refreshToken = async () =>{
     };
 
     const data = await res.json();
-    console.log("data=>", data)
     localStorage.setItem('token', data.accessToken);
     localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
 
