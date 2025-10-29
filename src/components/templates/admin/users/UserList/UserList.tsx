@@ -30,7 +30,6 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
     const [searchItem , setSearchItem] = useState('');
     const [roleFilter, setRoleFilter] = useState('all')
     const [activeFilter , setActiveFilter] = useState('all')
-    console.log("user =>", users)
 
     const filteredUsers = useMemo(()=>{
         return users?.filter((user)=>{
@@ -129,10 +128,7 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
                                 </div>
                                     <div className="flex gap-2">
                                         <EditUserModel/>
-                                        <Button variant='outline' size='sm'>
-                                            Suspend
-                                        </Button>
-                                        <DeleteUserModel/>
+                                        <DeleteUserModel id={user._id} firstName={user.firstName} lastName={user.lastName}/>
                                     </div>
                             </div>
                         </CardContent>
