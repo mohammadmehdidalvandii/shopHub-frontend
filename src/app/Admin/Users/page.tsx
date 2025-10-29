@@ -10,11 +10,10 @@ import { useGetAllUsers } from '@/services/userServices';
 const page:React.FC  = ()=>{
 
   const {data , isError ,isLoading} = useGetAllUsers()
-  console.log("data =>" , data)
   return (
     <AdminLayout>
         <UsersHeader/>
-        <UsersStats/>
+        <UsersStats orders={data}/>
         <UserList users={data} error={isError} loading={isLoading}/>
     </AdminLayout>
   )

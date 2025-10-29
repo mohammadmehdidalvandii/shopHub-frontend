@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { UserProps } from '@/types/users';
 
 interface userList {
@@ -27,7 +27,24 @@ const DeleteUserModel = dynamic(()=>import('@/components/models/DeleteUserModel'
 
 
 const UserList:React.FC<userList> = ({users , error , loading})=>{
+    const [searchItem , setSearchItem] = useState('');
+    const [roleFilter, setRoleFilter] = useState('all')
+    const [activeFilter , setActiveFilter] = useState('all')
     console.log("user =>", users)
+
+    const filteredUsers = useMemo(()=>{
+        return users?.filter((user)=>{
+            const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+            const email = user.email.toLowerCase();
+            const id = user._id.toLowerCase();
+            const search = searchItem.toLowerCase();
+            const matchSearch = fullName.includes(search) || email.includes(search) || id.includes(search);
+            const matchRole = roleFilter === 'all'? true : user.role.toLowerCase() === roleFilter;
+            const matchActive = activeFilter === 'all'? true : activeFilter === 'active' ? user.isActive === true : user.isActive === false;
+
+            return matchSearch && matchRole && matchActive
+        })
+    },[users , searchItem , roleFilter , activeFilter]);
 
     if(loading){
         return <p>Loading...</p>
@@ -46,20 +63,27 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
                         <Input
                         className='pl-10'
                         placeholder='Search users by name or email ...'
+                        value={searchItem}
+                        onChange={(e)=>setSearchItem(e.target.value)}
                         />
                     </div>
-                    <Select defaultValue='all'>
+                    <Select
+                    value={roleFilter}
+                    onValueChange={setRoleFilter}
+                    >
                         <SelectTrigger className='w-full md:w-[180px]'>
                             <SelectValue placeholder='Filter by role'/>
                         </SelectTrigger>
                         <SelectContent className='font-robotBold font-bold'>
                             <SelectItem value='all'> All Users</SelectItem>
                             <SelectItem value='admin'>Admin</SelectItem>
-                            <SelectItem value='moderator'>moderators</SelectItem>
                             <SelectItem value='customer'>Customers</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Select defaultValue='active'>
+                    <Select 
+                    value={activeFilter}
+                    onValueChange={setActiveFilter}
+                    >
                         <SelectTrigger className='w-full md:w-[180px]'>
                             <SelectValue placeholder='Filter by Status'/>
                         </SelectTrigger>
@@ -71,7 +95,7 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
                     </Select>
                 </div>
                 <div className="space-y-4">
-                    {users.map((user)=>(
+                    {filteredUsers.map((user)=>(
                     <Card key={user._id}>
                         <CardContent className='p-6'>
                             <div className="flex items-start justify-between">
@@ -93,14 +117,14 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
                                             <p className="text-gray-medium">Join Date</p>
                                             <p className="font-semibold">12/2/2024</p>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             <p className="text-gray-medium">Total Order</p>
                                             <p className="font-semibold">123 orders</p>
                                         </div>
                                         <div>
                                             <p className="text-gray-medium">Total Spent</p>
                                             <p className="font-semibold">$8,765.82</p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                     <div className="flex gap-2">
