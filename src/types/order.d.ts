@@ -22,4 +22,5 @@
   status: 'pending' | 'paid' | 'shipped' | 'completed' | 'cancelled';
   paymentMethod: string;
   createdAt: string;
+  isActive:boolean,
 };
