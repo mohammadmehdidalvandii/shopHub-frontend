@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Eye, Search, Truck } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { Order } from '@/types/order';
+import OrdersAdminModel from '@/components/models/OrdersAdminModel';
 
 
 type OrdersListProps = {
@@ -115,9 +116,7 @@ const OrderList:React.FC<OrdersListProps> = ({orders , error , loading})=>{
                                     </div>
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button variant='outline' size='icon'>
-                                        <Eye className='h-4 w-4'/>
-                                    </Button>
+                                    <OrdersAdminModel/>
                                     <Button variant='outline' size='icon'>
                                         <Truck className='h-4 w-4'/>
                                     </Button>
