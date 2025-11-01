@@ -44,7 +44,7 @@ const ProfileInfo: React.FC = () => {
     }
 
     updateProfileMutation.mutate(
-        {id , formData},
+        {id , formData:updatedFields as any},
         {
             onSuccess:(data)=>{
                 updateUser(data);

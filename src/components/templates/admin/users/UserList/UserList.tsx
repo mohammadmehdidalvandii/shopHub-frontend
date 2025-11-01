@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import React, { useMemo, useState } from 'react';
+import React, { use, useMemo, useState } from 'react';
 import { UserProps } from '@/types/users';
 
 interface userList {
@@ -127,7 +127,15 @@ const UserList:React.FC<userList> = ({users , error , loading})=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2">
-                                        <EditUserModel/>
+                                        <EditUserModel 
+                                        id={user._id}
+                                        firstName={user.firstName}
+                                        lastName={user.lastName}
+                                        role={user.role}
+                                        phone={user.phone}
+                                        email={user.email}
+                                        isActive={user.isActive}
+                                        />
                                         <DeleteUserModel id={user._id} firstName={user.firstName} lastName={user.lastName}/>
                                     </div>
                             </div>

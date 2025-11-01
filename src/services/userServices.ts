@@ -1,7 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { fetchWithAuth } from "./fetchWithAuth";
 import { showError, showSuccess } from "@/utils/Toasts";
-const API_URL = 'http://localhost:3000/api/users/'
+const API_URL = 'http://localhost:3000/api/users/';
+
+
+interface UpdatedUser{
+    firstName:string,
+    lastName:string,
+    email:string,
+    role:string,
+    phone:string,
+    isActive:boolean,
+};
+
 export const useGetAllUsers = ()=>{
     return useQuery({
         queryKey:['users'],
@@ -44,6 +55,28 @@ export const useDeleteUser = ()=>{
         },
         onError:(error:any)=>{
             showError( error?.message ||'Delete user Failed')
+        }
+    })
+};
+
+
+export const useUpdateUser = ()=>{
+    return useMutation({
+        mutationFn: async ({formUser , id}:{id:string, formUser:UpdatedUser})=>{
+            console.log("formUser=>", formUser)
+            const res =  await fetchWithAuth(`${API_URL}${id}`,{
+                method:"PATCH",
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body:JSON.stringify(formUser),
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Updated User failed');
+            };
+            const data = await res.json();
+            return data.data
         }
     })
 }
