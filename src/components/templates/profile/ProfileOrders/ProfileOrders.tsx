@@ -1,4 +1,5 @@
 "use client"
+import OrdersUserModel from '@/components/models/OrdersUserModel';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Cart';
@@ -62,7 +63,7 @@ const ProfileOrders:React.FC = ()=>{
                                 <p className="text-xl font-robotoBold font-bold text-primary">${order.totalAmount}</p>
                             </div>
                             <div className="flex gap-2">
-                                <Button variant='outline' size='sm'>View Details</Button>
+                                <OrdersUserModel/>
                                 {/* status order ==== delivered buy again */}
                                 {/* <Button variant='outline' size='sm'>Buy Again</Button> */}
                             </div>
