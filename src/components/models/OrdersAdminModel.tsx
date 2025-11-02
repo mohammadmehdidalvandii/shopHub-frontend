@@ -13,8 +13,6 @@ interface orderProps {
 const OrdersAdminModel: React.FC<orderProps> = ({order}) => {
   const [isShow, setIsShow] = useState<boolean>(false);
 
-    console.log("order =>" , order)
-
   return (
     <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
