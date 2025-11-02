@@ -1,8 +1,28 @@
- export type Order = {
+export type Product = {
+  _id: string;
+  productName: string;
+  productSKU: string;
+  price: number;
+  category: string;
+  brand: string;
+  description: string;
+  stockQuantity: number;
+  weight: number;
+  dimensions: string;
+  tags: string[];
+  images: string[];
+  status: string;
+  vender: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+export type Order = {
   _id: string;
   user: string;
   items: {
-    product: string;
+    product:  Product;
     quantity: number;
     price: number;
   }[];

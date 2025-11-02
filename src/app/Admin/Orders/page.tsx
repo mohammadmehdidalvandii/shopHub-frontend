@@ -11,8 +11,6 @@ import { useGetAllOrders } from '@/services/orderServices';
 const page:React.FC = ()=>{
   const {data , isLoading , isError} = useGetAllOrders();
 
-  console.log("data =>" , data);
-
   return (
     <AdminLayout>
         <OrdersHeader/>
