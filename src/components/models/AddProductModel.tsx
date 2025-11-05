@@ -7,10 +7,14 @@ import { Label } from '../ui/Label';
 import { Input } from '../ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
 import { useGetCategory } from '@/services/categoryServices';
+import { useCreateProduct } from '@/services/productServices';
+import { showError, showSuccess } from '@/utils/Toasts';
 
 const AddProductModel:React.FC = ()=>{
     const [isAddProduct , setIsAddProducts] = useState<boolean>(false);
-    
+    const [category , setCategory] = useState('');
+    const [status , setStatus] = useState('active');
+    const createProduct = useCreateProduct()
     
     const {data , isError , isLoading} = useGetCategory();
       if (isLoading) {
@@ -18,6 +22,25 @@ const AddProductModel:React.FC = ()=>{
   }
   if (isError) {
     return <p>Failed to load orders</p>;
+  };
+
+
+  const handlerCreateProduct = (e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    formData.append('category',category);
+    formData.append('status', status);
+
+    createProduct.mutate(formData,{
+        onSuccess:()=>{
+            showSuccess('created product successfully');
+            window.location.reload();
+        },
+        onError:(error:any)=>{
+            showError(error.message || 'created product failed');
+        }
+    })
   }
 
   return (
@@ -35,35 +58,29 @@ const AddProductModel:React.FC = ()=>{
                     Fill in the details to add a new product to your store
                 </DialogDescription>
             </DialogHeader>
-             <form action="#" className='space-y-4'>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <form action="#" onSubmit={handlerCreateProduct}  className='space-y-4'>
                     <div className="space-y-2">
                         <Label htmlFor='productName'>Product Name</Label>
-                        <Input id='productName' placeholder='e.g.,premium Wireless headphones' required/>
+                        <Input name='productName' id='productName' placeholder='e.g.,premium Wireless headphones' required/>
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor='productSKU'>SKU</Label>
-                        <Input id='productSKU' placeholder='e.g.,WH-1000XM5' required/>
-                    </div>
-                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor='productPrice'>Price</Label>
-                        <Input id='productPrice' placeholder='299.99' step='0.01' type='number' required/>
+                        <Input  name='price' id='productPrice' placeholder='299.99' step='0.01' type='number' required/>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor='productComparePrice'>Compare at Price</Label>
-                        <Input id='productComparePrice' type='number' step='0.01' placeholder='399.99' required/>
+                        <Input name='compareAtPrice' id='productComparePrice' type='number' step='0.01' placeholder='399.99' />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor='productCost'>Cost per Item</Label>
-                        <Input id='productCost' type='number' step='0.01' placeholder='150.00' required/>
+                        <Input name='costPerItem' id='productCost' type='number' step='0.01' placeholder='150.00' />
                     </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor='productCategory' className='block mb-4'>Category</Label>
-                        <Select>
+                        <Select value={category} onValueChange={setCategory}>
                             <SelectTrigger>
                                 <SelectValue placeholder='Select Category'/>
                             </SelectTrigger>
@@ -76,54 +93,54 @@ const AddProductModel:React.FC = ()=>{
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor='productBrand'>Brand</Label>
-                        <Input id='productBrand' placeholder='e.g.,Sony' required/>
+                        <Input name='brand' id='productBrand' placeholder='e.g.,Sony' required/>
                     </div>
                 </div>
                     <div className="space-y-2">
                         <Label htmlFor='productDescription'>Description</Label>
-                        <Input id='productDescription' placeholder='Detailed product description...' className='min-h-[180px]' required/>
+                        <Input name='description' id='productDescription' placeholder='Detailed product description...' className='min-h-[180px]' required/>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor='productStock'>Stock Quantity</Label>
-                            <Input id='productStock' type='number' placeholder='50' required/>
+                            <Input name='stockQuantity' id='productStock' type='number' placeholder='50' required/>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor='productWeight'>weight (kg)</Label>
-                            <Input id='productWeight' type='number' placeholder='0.25' step='0.01'  required/>
+                            <Input name='weight' id='productWeight' type='number' placeholder='0.25' step='0.01'  required/>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor='productBarcode'>Barcode</Label>
-                            <Input id='productBarcode' placeholder='123456789012' required/>
+                            <Input name='barcode' id='productBarcode' placeholder='123456789012' required/>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor='productLength'>Length (cm)</Label>
-                            <Input id='productLength' type='number' step='0.01' placeholder='20' required/>
+                            <Input name='length' id='productLength' type='number' step='0.01' placeholder='20' required/>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor='productWidth'>Width (cm)</Label>
-                            <Input id='productWidth' type='number' step='0.1' placeholder='18' required/>
+                            <Input name='width' id='productWidth' type='number' step='0.1' placeholder='18' required/>
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor='productHight'>Hight (cm)</Label>
-                            <Input id='productHight' type='number' step='0.01'  placeholder='8' required/>
+                            <Label htmlFor='productHeight'>Height (cm)</Label>
+                            <Input name='height' id='productHeight' type='number' step='0.01'  placeholder='8' required/>
                         </div>
                     </div>
                         <div className="space-y-2">
                             <Label htmlFor='productTags'>Tags (comma separated)</Label>
-                            <Input id='productTags' placeholder='wireless , premium , noise-cancelling' required/>
+                            <Input name='tags' id='productTags' placeholder='wireless , premium , noise-cancelling' required/>
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor='productImage'>Product Image</Label>
-                            <Input id='productImage' type='file' accept='image/*' multiple required/>
+                            <Input name='images' id='productImage' type='file' accept='image/*' multiple required/>
                             <p className="text-lg text-gray-medium">You can upload multiple images</p>
                         </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor='productStatus' className='block mb-4'>Status</Label>
-                            <Select defaultValue='active' >
+                            <Select value={status} onValueChange={setStatus} >
                                 <SelectTrigger>
                                     <SelectValue placeholder='Select status'/>
                                 </SelectTrigger>
@@ -136,7 +153,7 @@ const AddProductModel:React.FC = ()=>{
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor='productVender'>Vender</Label>
-                            <Input id='productVender' placeholder='e.g., Sony Corporation' required/>
+                            <Input name='vender' id='productVender' placeholder='e.g., Sony Corporation' required/>
                         </div>
                     </div>
                     <div className="flex gap-2 justify-end pt-4 border-t border-t-border">
