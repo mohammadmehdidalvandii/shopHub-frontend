@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Edit, Search, Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import dynamic from 'next/dynamic';
@@ -26,6 +26,20 @@ type productData = {
 }
 
 const ProductList:React.FC<productData> = ({products , error , loading})=>{
+    const [searchItem , setSearchItem] = useState('');
+    const [categoryFilter , setCategoryFilter] = useState('all');
+
+    const filteredProducts = useMemo(()=>{
+        return products?.filter((product)=>{
+            const name = product.productName.toLowerCase();
+            const category = product.category.title.toLowerCase();
+            const stock = product.stockQuantity;
+            const status = product.status.toLowerCase();
+            
+            const matchSearch = name.includes(searchItem)||category.includes(searchItem)||stock.includes(searchItem)||status.includes(searchItem);
+            return matchSearch
+        })
+    },[products, searchItem , categoryFilter])
 
       if (loading) {
     return <p>Loading...</p>;
@@ -57,9 +71,12 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
                 <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
                     <div className="relative flex-1">
                         <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-medium'/>
-                        <Input className='pl-10 h-10' placeholder='Search products bg name or category ...'/>
+                        <Input className='pl-10 h-10' placeholder='Search products bg name or category ...'
+                        value={searchItem}
+                        onChange={(e)=>setSearchItem(e.target.value)}
+                        />
                     </div>
-                    <Select defaultValue='all'>
+                    <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                         <SelectTrigger className='w-full h-10 md:w-[180px]'>
                             <SelectValue placeholder='Filter by category'/>
                         </SelectTrigger>
@@ -73,7 +90,7 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
                     </Select>
                 </div>
                 <div className="space-y-4">
-                    {products.map((product)=>(
+                    {filteredProducts.map((product)=>(
                     <Card key={product._id}>
                         <CardContent className='p-4 sm:p-6' >
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
