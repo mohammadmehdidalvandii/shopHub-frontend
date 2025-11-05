@@ -6,9 +6,20 @@ import { Plus } from 'lucide-react';
 import { Label } from '../ui/Label';
 import { Input } from '../ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
+import { useGetCategory } from '@/services/category';
 
 const AddProductModel:React.FC = ()=>{
-    const [isAddProduct , setIsAddProducts] = useState<boolean>(false)
+    const [isAddProduct , setIsAddProducts] = useState<boolean>(false);
+    
+    
+    const {data , isError , isLoading} = useGetCategory();
+      if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (isError) {
+    return <p>Failed to load orders</p>;
+  }
+
   return (
     <Dialog open={isAddProduct} onOpenChange={setIsAddProducts}>
         <DialogTrigger asChild>
@@ -57,10 +68,9 @@ const AddProductModel:React.FC = ()=>{
                                 <SelectValue placeholder='Select Category'/>
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value='electronics'>Electronics</SelectItem>
-                                <SelectItem value='audio'>Audio</SelectItem>
-                                <SelectItem value='wearables'>Wearables</SelectItem>
-                                <SelectItem value='accessories'>Accessories</SelectItem>
+                                {data.map((item:any)=>(
+                                    <SelectItem key={item._id} value={item._id}>{item.title}</SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>
