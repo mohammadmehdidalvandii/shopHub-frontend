@@ -1,7 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
 const API_URL = 'http://localhost:3000/api/products/';
-
 
 
 export const useCreateProduct = ()=>{
@@ -18,5 +17,25 @@ export const useCreateProduct = ()=>{
             const data = await res.json();
             return data.data
         }
+    })
+};
+
+export const useGetAllProducts = ()=>{
+    return useQuery({
+        queryKey:['products'],
+        queryFn:async ()=>{
+            const res = await fetch(`${API_URL}`,{
+                method:"GET",
+            });
+            if(!res.json){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'get products Failed');
+            };
+
+            const data = await res.json();
+            return data.data
+        },
+        retry:2,
+        refetchOnWindowFocus:false,
     })
 }

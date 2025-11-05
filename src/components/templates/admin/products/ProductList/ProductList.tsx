@@ -1,14 +1,14 @@
 "use client"
-import { Card, CardContent } from '@/components/ui/Cart';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Cart';
 import { Input } from '@/components/ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
 import { Edit, Search, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import Product from '../../../../../../public/assets/images/product.png'
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import dynamic from 'next/dynamic';
+import { ProductProps } from '@/types/product';
 
 const EditProductModel = dynamic(()=>import('@/components/models/EditProductModel'),{
     ssr:false,
@@ -19,7 +19,37 @@ const DeleteProductModel = dynamic(()=>import('@/components/models/DeleteProduct
     loading:()=> <Button variant='ghost' size='sm' className='text-blue-700'>Loading</Button>
 })
 
-const ProductList:React.FC = ()=>{
+type productData = {
+    products:ProductProps[],
+    error?:boolean,
+    loading?:boolean,
+}
+
+const ProductList:React.FC<productData> = ({products , error , loading})=>{
+
+      if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Failed to load orders</p>;
+  }
+
+
+    if (products.length === 0) {
+    return (
+      <Card className="text-center py-10">
+        <CardHeader>
+          <CardTitle>No Products Found</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-medium font-robotoBlack font-black text-lg">
+            No Products have been placed..
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="container mx-auto">
         <Card>
@@ -43,29 +73,32 @@ const ProductList:React.FC = ()=>{
                     </Select>
                 </div>
                 <div className="space-y-4">
-                    <Card>
-                        <CardContent className='p-4 sm:p-6'>
+                    {products.map((product)=>(
+                    <Card key={product._id}>
+                        <CardContent className='p-4 sm:p-6' >
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-gray-light shrink-0">
-                                    <Image src={Product} alt='product name'width={200} height={200} className='w-full h-full'/>
+                                    {product.images?.map((img , index)=>(
+                                        <Image key={index} src={img} alt='product name'width={200} height={200} className='w-full h-full'/>
+                                    ))}
                                 </div>
                                 <div className="flex-1 w-full">
                                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                                        <h3 className="font-robotoBold font-bold sm:text-lg">product name</h3>
-                                        <Badge variant='default'>category</Badge>
+                                        <h3 className="font-robotoBold font-bold sm:text-lg">{product.productName}</h3>
+                                        <Badge variant='default'>{product?.category?.title}</Badge>
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-lg">
                                         <div>
                                             <p className="text-gray-medium text-sm">price</p>
-                                            <p className="font-robotoBold font-bold text-primary">$899.99</p>
+                                            <p className="font-robotoBold font-bold text-primary">${product.price}</p>
                                         </div>
                                         <div>
                                             <p className="text-gray-medium text-sm">Stock</p>
-                                            <p className="font-robotoBold font-bold">units</p>
+                                            <p className="font-robotoBold font-bold">{product.stockQuantity}</p>
                                         </div>
                                         <div className='col-span-2 sm:col-span-1'>
                                             <p className="text-gray-medium text-sm">Status</p>
-                                            <p className="font-robotoBold font-semibold">In stock</p>
+                                            <p className="font-robotoBold font-semibold">{product.status}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,77 +109,7 @@ const ProductList:React.FC = ()=>{
                             </div>
                         </CardContent>
                     </Card>
-                    <Card>
-                        <CardContent className='p-4 sm:p-6'>
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-gray-light shrink-0">
-                                    <Image src={Product} alt='product name'width={200} height={200} className='w-full h-full'/>
-                                </div>
-                                <div className="flex-1 w-full">
-                                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                                        <h3 className="font-robotoBold font-bold sm:text-lg">product name</h3>
-                                        <Badge variant='default'>category</Badge>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-lg">
-                                        <div>
-                                            <p className="text-gray-medium text-sm">price</p>
-                                            <p className="font-robotoBold font-bold text-primary">$899.99</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium text-sm">Stock</p>
-                                            <p className="font-robotoBold font-bold">units</p>
-                                        </div>
-                                        <div className='col-span-2 sm:col-span-1'>
-                                            <p className="text-gray-medium text-sm">Status</p>
-                                            <p className="font-robotoBold font-semibold">In stock</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div className="flex gap-2 w-full sm:w-auto">
-                                        <EditProductModel/>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
-                                    </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card>
-                        <CardContent className='p-4 sm:p-6'>
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-gray-light shrink-0">
-                                    <Image src={Product} alt='product name'width={200} height={200} className='w-full h-full'/>
-                                </div>
-                                <div className="flex-1 w-full">
-                                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                                        <h3 className="font-robotoBold font-bold sm:text-lg">product name</h3>
-                                        <Badge variant='default'>category</Badge>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-lg">
-                                        <div>
-                                            <p className="text-gray-medium text-sm">price</p>
-                                            <p className="font-robotoBold font-bold text-primary">$899.99</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-gray-medium text-sm">Stock</p>
-                                            <p className="font-robotoBold font-bold">units</p>
-                                        </div>
-                                        <div className='col-span-2 sm:col-span-1'>
-                                            <p className="text-gray-medium text-sm">Status</p>
-                                            <p className="font-robotoBold font-semibold">In stock</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div className="flex gap-2 w-full sm:w-auto">
-                                        <EditProductModel/>
-                                        <Button variant='outline' size='icon'>
-                                            <Trash2 className='h-4 w-4'/>
-                                        </Button>
-                                    </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-
+                    ))}
                 </div>
             </CardContent>
         </Card>
