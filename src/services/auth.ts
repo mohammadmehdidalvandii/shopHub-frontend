@@ -135,6 +135,12 @@ export const refreshToken = async () =>{
     localStorage.setItem('token', data.accessToken);
     localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
 
+      const { login } = useAuthStore.getState();
+  const currentUser = useAuthStore.getState().user;
+  if (currentUser) {
+    login(data.accessToken, currentUser);
+  }
+
     return data.accessToken
 };
 
@@ -143,6 +149,7 @@ export const getValidToken = async ()=>{
      if(token) return token;
 
      token = await refreshToken();
+
      return token
 };
 
