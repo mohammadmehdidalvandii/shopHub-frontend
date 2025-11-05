@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react';
 import { Label } from '../ui/Label';
 import { Input } from '../ui/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/Select';
-import { useGetCategory } from '@/services/category';
+import { useGetCategory } from '@/services/categoryServices';
 
 const AddProductModel:React.FC = ()=>{
     const [isAddProduct , setIsAddProducts] = useState<boolean>(false);
