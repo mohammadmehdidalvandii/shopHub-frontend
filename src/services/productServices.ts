@@ -60,8 +60,6 @@ export const useDeleteProduct = ()=>{
 export const useUpdateProduct= ()=>{
     return useMutation({
         mutationFn: async ({formData , id}:{id:string ,formData:FormData})=>{
-            console.log("id =>", id);
-            console.log("formData,", formData)
             const res = await fetchWithAuth(`${API_URL}${id}`,{
                 method:"PATCH",
                 body:formData,
