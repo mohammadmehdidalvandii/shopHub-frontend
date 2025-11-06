@@ -1,9 +1,25 @@
+"use client"
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardContent } from "@/components/ui/Cart";
+import { useGetAllOrders } from "@/services/orderServices";
+import { useGetAllProducts } from "@/services/productServices";
+import { useGetAllUsers } from "@/services/userServices";
 import { ArrowDownRight, DollarSign, ShoppingBag, TrendingUp, Users } from "lucide-react";
 import React from "react";
 
 const DashboardStats: React.FC = () => {
+  const {data:orders=[]} = useGetAllOrders();
+  const {data:users=[]} = useGetAllUsers();  
+  const {data:products=[]} = useGetAllProducts();
+
+const totalRevenue = orders.reduce((sum: number, order: any) => {
+  return sum + Number(order.totalAmount || 0);
+}, 0);
+
+  const totalOrders = orders.length ?? 0;
+  const totalUser = users.length ?? 0;
+  const totalProducts = products.length ?? 0;
+
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:gird-cols-4 gap-6 mb-8">
@@ -20,7 +36,7 @@ const DashboardStats: React.FC = () => {
             </div>
             <div>
                 <p className="text-lg text-gray-medium mb-1">Total Revenue</p>
-                <p className="text-3xl font-bold">$45,231.89</p>
+                <p className="text-3xl font-bold">${totalRevenue}</p>
                 <p className="text-lg text-gray-medium mt-2">+5,231 from last month</p>
             </div>
           </CardContent>
@@ -38,7 +54,7 @@ const DashboardStats: React.FC = () => {
             </div>
             <div>
                 <p className="text-lg text-gray-medium mb-1">Total Orders</p>
-                <p className="text-3xl font-bold">1,234</p>
+                <p className="text-3xl font-bold">{totalOrders}</p>
                 <p className="text-lg text-gray-medium mt-2">+156 from last month</p>
             </div>
           </CardContent>
@@ -56,7 +72,7 @@ const DashboardStats: React.FC = () => {
             </div>
             <div>
                 <p className="text-lg text-gray-medium mb-1">Total Users</p>
-                <p className="text-3xl font-bold">3.456</p>
+                <p className="text-3xl font-bold">{totalUser}</p>
                 <p className="text-lg text-gray-medium mt-2">+201 new users</p>
             </div>
           </CardContent>
@@ -74,7 +90,7 @@ const DashboardStats: React.FC = () => {
             </div>
             <div>
                 <p className="text-lg text-gray-medium mb-1">Total Products</p>
-                <p className="text-3xl font-bold">892</p>
+                <p className="text-3xl font-bold">{totalProducts}</p>
                 <p className="text-lg text-gray-medium mt-2">-12 from last month</p>
             </div>
           </CardContent>
