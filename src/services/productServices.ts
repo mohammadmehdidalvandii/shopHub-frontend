@@ -27,7 +27,7 @@ export const useGetAllProducts = ()=>{
             const res = await fetch(`${API_URL}`,{
                 method:"GET",
             });
-            if(!res.json){
+            if(!res.ok){
                 const errorData = await res.json();
                 throw new Error(errorData.message || 'get products Failed');
             };
@@ -54,5 +54,25 @@ export const useDeleteProduct = ()=>{
             const data = await res.json();
             return data.data
         },
+    })
+}
+
+export const useUpdateProduct= ()=>{
+    return useMutation({
+        mutationFn: async ({formData , id}:{id:string ,formData:FormData})=>{
+            console.log("id =>", id);
+            console.log("formData,", formData)
+            const res = await fetchWithAuth(`${API_URL}${id}`,{
+                method:"PATCH",
+                body:formData,
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Updated product Failed')
+            };
+
+            const data = await res.json();
+            return data.data
+        }
     })
 }

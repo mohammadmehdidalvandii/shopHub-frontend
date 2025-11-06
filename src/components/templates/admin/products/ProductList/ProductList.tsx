@@ -122,7 +122,14 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
                                     </div>
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
-                                        <EditProductModel/>
+                                        <EditProductModel
+                                        id={product._id}
+                                        productName={product.productName}
+                                        category={product.category.title}
+                                        price={product.price}
+                                        images={product.images}
+                                        stockQuantity={product.stockQuantity}
+                                        />
                                         <DeleteProductModel id={product._id}/>
                                     </div>
                             </div>
