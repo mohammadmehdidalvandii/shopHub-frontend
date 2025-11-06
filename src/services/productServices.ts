@@ -38,4 +38,21 @@ export const useGetAllProducts = ()=>{
         retry:2,
         refetchOnWindowFocus:false,
     })
+};
+
+
+export const useDeleteProduct = ()=>{
+    return useMutation({
+        mutationFn:async (id:string)=>{
+            const res = await fetchWithAuth(`${API_URL}${id}`,{
+                method:"DELETE",
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Delete Product Failed')
+            };
+            const data = await res.json();
+            return data.data
+        },
+    })
 }

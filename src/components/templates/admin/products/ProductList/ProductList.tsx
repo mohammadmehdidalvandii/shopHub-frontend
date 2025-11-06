@@ -121,7 +121,7 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
                                 </div>
                                     <div className="flex gap-2 w-full sm:w-auto">
                                         <EditProductModel/>
-                                        <DeleteProductModel/>
+                                        <DeleteProductModel id={product._id}/>
                                     </div>
                             </div>
                         </CardContent>

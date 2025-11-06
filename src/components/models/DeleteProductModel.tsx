@@ -2,8 +2,28 @@ import React from 'react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/AlertDialog';
 import { Button } from '../ui/Button';
 import { Trash2 } from 'lucide-react';
+import { useDeleteProduct } from '@/services/productServices';
+import { showError, showSuccess } from '@/utils/Toasts';
 
-const DeleteProductModel:React.FC = ()=>{
+interface DeleteProps{
+    id:string
+}
+
+const DeleteProductModel:React.FC<DeleteProps> = ({id})=>{
+    const deleteProduct = useDeleteProduct();
+
+    const handlerDeleteProduct = (userID:string)=>{
+        deleteProduct.mutate(userID,{
+            onSuccess:()=>{
+                showSuccess('Delete Product Successfully')
+                window.location.reload()
+            },
+            onError:(error:any)=>{
+                showError(error.message ||'Delete Product Failed')
+            }
+        })
+    }
+
   return (
         <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -19,6 +39,7 @@ const DeleteProductModel:React.FC = ()=>{
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction
+                onClick={()=>handlerDeleteProduct(id)}
                 >
                     Delete User
                 </AlertDialogAction>
