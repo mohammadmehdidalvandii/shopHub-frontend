@@ -1,11 +1,20 @@
+"use client"
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Cart';
+import { useGetAllOrders } from '@/services/orderServices';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
 const DashboardOrders:React.FC = ()=>{
+    const {data , isError , isLoading} = useGetAllOrders();
+       if(isLoading){
+        return <p>Loading...</p>
+    };
+     if(isError){
+        return <p>Failed to load orders</p>
+    };
   return (
     <div className="container mx-auto">
         <Card>
@@ -20,54 +29,32 @@ const DashboardOrders:React.FC = ()=>{
             </CardHeader>
             <CardContent>
                 <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 rounded-lg border border-border">
+                {data.slice(0 ,  3).map((order:any)=>(
+                <div className="flex items-center justify-between p-4 rounded-lg border border-border" key={order._id}>
                     <div>
-                        <p className="font-semibold">#ORD-001</p>
-                        <p className="text-lg text-gray-medium">John Doe</p>
-                        <p className="text-sm text-gray-medium mt-1">12/10/2025</p>
+                        <p className="font-semibold">#ORD-{order._id}</p>
+                        <p className="text-lg text-gray-medium">{order.customerInfo.firstName}{order.customerInfo.lastName}</p>
+                        <p className="text-sm text-gray-medium mt-1">{new Date(order.createdAt).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                        <p className="font-robotoBold font-bold text-primary">$899.99</p>
+                        <p className="font-robotoBold font-bold text-primary">${order.totalAmount}</p>
                         <Badge
-                        variant='default'
-                        className='mt-2'
+                          variant={
+                            order.status === "completed"
+                              ? "default"
+                              : order.status === "shipped"
+                              ? "secondary"
+                              : order.status === "cancelled"
+                              ? "destructive"
+                              : "outline"
+                          }
+                          className='mt-2'
                         >
-                            Delivered
+                          {order.status}
                         </Badge>
                     </div>
                 </div>
-                <div className="flex items-center justify-between p-4 rounded-lg border border-border">
-                    <div>
-                        <p className="font-semibold">#ORD-001</p>
-                        <p className="text-lg text-gray-medium">John Doe</p>
-                        <p className="text-sm text-gray-medium mt-1">12/10/2025</p>
-                    </div>
-                    <div className="text-right">
-                        <p className="font-robotoBold font-bold text-primary">$899.99</p>
-                        <Badge
-                        variant='default'
-                        className='mt-2'
-                        >
-                            Delivered
-                        </Badge>
-                    </div>
-                </div>
-                <div className="flex items-center justify-between p-4 rounded-lg border border-border">
-                    <div>
-                        <p className="font-semibold">#ORD-001</p>
-                        <p className="text-lg text-gray-medium">John Doe</p>
-                        <p className="text-sm text-gray-medium mt-1">12/10/2025</p>
-                    </div>
-                    <div className="text-right">
-                        <p className="font-robotoBold font-bold text-primary">$899.99</p>
-                        <Badge
-                        variant='default'
-                        className='mt-2'
-                        >
-                            Delivered
-                        </Badge>
-                    </div>
-                </div>
+                ))}
 
                 </div>
             </CardContent>
