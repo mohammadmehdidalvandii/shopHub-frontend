@@ -36,8 +36,10 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
             const stock = product.stockQuantity;
             const status = product.status.toLowerCase();
             
+            const matchCategory = categoryFilter === 'all' ? true : product.category.title.toLowerCase() === categoryFilter
+
             const matchSearch = name.includes(searchItem)||category.includes(searchItem)||stock.includes(searchItem)||status.includes(searchItem);
-            return matchSearch
+            return matchSearch && matchCategory
         })
     },[products, searchItem , categoryFilter])
 

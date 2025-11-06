@@ -2,7 +2,6 @@ import { getValidToken } from "./auth";
 
 export const fetchWithAuth = async (url:string, options:RequestInit = {})=>{
     const token = await getValidToken();
-    console.log("token =>", token)
     if(!token){
         window.location.replace('/Auth')
     };
