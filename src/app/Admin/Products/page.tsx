@@ -13,7 +13,7 @@ const page:React.FC = ()=>{
   return (
     <AdminLayout>
         <ProductsHeader/>
-        <ProductsStats/>
+        <ProductsStats products={data}/>
         <ProductList products={data} loading={isLoading} error={isError}/>
     </AdminLayout>
   )

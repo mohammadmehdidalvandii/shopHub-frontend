@@ -5,7 +5,6 @@ type OrdersListProps = {
   orders: Order[];
 };
 const UsersStats:React.FC<OrdersListProps> = ({orders})=>{
-    console.log("orders =>" , orders)
     const totalUsers = orders?.length ?? 0;
     const activeUsers = orders?.filter((user)=>user.isActive == true).length ?? 0;
     const suspendedUsers = orders?.filter((user)=>user.isActive == false).length ?? 0;
