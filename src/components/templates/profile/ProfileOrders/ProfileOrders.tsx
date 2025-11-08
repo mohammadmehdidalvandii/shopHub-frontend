@@ -63,7 +63,7 @@ const ProfileOrders:React.FC = ()=>{
                                 <p className="text-xl font-robotoBold font-bold text-primary">${order.totalAmount}</p>
                             </div>
                             <div className="flex gap-2">
-                                <OrdersUserModel/>
+                                <OrdersUserModel orders={order}/>
                                 {/* status order ==== delivered buy again */}
                                 {/* <Button variant='outline' size='sm'>Buy Again</Button> */}
                             </div>
