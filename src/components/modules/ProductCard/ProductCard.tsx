@@ -13,7 +13,8 @@ const ProductCard:React.FC = ()=>{
         <CardContent>
             <div className="aspect-square overflow-hidden bg-gray-light relative">
                 <Image src={product} alt='product name' width={1000} height={1000} className='w-full h-ful object-cover group-hover:scale-105 transition-transform duration-300'/>
-                <Button size="icon" variant="outline" className='absolute top-2 right-2 bg-gray-light backdrop-blur-sm'>
+                <Button size="icon" variant="outline" className='absolute top-2 right-2 bg-gray-light backdrop-blur-sm' aria-label='add-to-wishlist'
+                >
                 <Heart className='h-4 w-4'/>
                 </Button>
             </div>
