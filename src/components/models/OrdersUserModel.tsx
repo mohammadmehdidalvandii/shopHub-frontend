@@ -33,19 +33,19 @@ const OrdersUserModel:React.FC<OrdersProps> = ({orders})=>{
                     </div>
                     <div>
                         <p className="text-lg text-gray-medium">Status</p>
-                                                <Badge
-                                                  variant={
-                                                    orders.status === "completed"
-                                                      ? "default"
-                                                      : orders.status === "shipped"
-                                                      ? "secondary"
-                                                      : orders.status === "cancelled"
-                                                      ? "destructive"
-                                                      : "outline"
-                                                  }
-                                                >
-                                                  {orders.status}
-                                                </Badge>
+                        <Badge
+                          variant={
+                            orders.status === "completed"
+                              ? "default"
+                              : orders.status === "shipped"
+                              ? "secondary"
+                              : orders.status === "cancelled"
+                              ? "destructive"
+                              : "outline"
+                          }
+                        >
+                          {orders.status}
+                        </Badge>
                     </div>
                 </div>
                 <div className="border-t pt-4">
