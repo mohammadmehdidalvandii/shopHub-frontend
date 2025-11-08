@@ -2,12 +2,23 @@
 import ProductCard from '@/components/modules/ProductCard/ProductCard';
 import { Button } from '@/components/ui/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select';
+import { useGetAllProducts } from '@/services/productServices';
 import React, { useState } from 'react'
 
 const Products:React.FC = ()=>{
     const [selectedCategory, setSelectCategory] = useState<string>('all');
 
     const categories = ['all', 'electronics','audio','wearables','accessories'];
+
+
+    const {data , isError , isLoading} = useGetAllProducts();
+          if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (isError) {
+    return <p>Failed to load Products</p>;
+  }
+
   return (
     <section>
         <div className="container mx-auto px-4 py-8">
@@ -44,14 +55,16 @@ const Products:React.FC = ()=>{
                 </div>
             </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
+                    {data.map((product:any)=>(
+                        <ProductCard
+                            key={product._id}
+                            id={product._id}
+                            images={product.images}
+                            productName={product.productName}
+                            category={product.category.title}
+                            price={product.price}
+                        />
+                    ))}
                 </div>
         </div>
     </section>

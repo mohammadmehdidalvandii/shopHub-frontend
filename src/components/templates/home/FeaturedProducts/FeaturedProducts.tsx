@@ -1,9 +1,18 @@
+"use client"
 import ProductCard from '@/components/modules/ProductCard/ProductCard'
 import { Button } from '@/components/ui/Button'
+import { useGetAllProducts } from '@/services/productServices'
 import Link from 'next/link'
 import React from 'react'
 
 const FeaturedProducts:React.FC = ()=>{
+      const {data , isError , isLoading} = useGetAllProducts();
+            if (isLoading) {
+      return <p>Loading...</p>;
+    }
+    if (isError) {
+      return <p>Failed to load Products</p>;
+    }
   return (
     <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-12">
@@ -11,10 +20,16 @@ const FeaturedProducts:React.FC = ()=>{
             <p className="text-gary-medium text-lg">Handpicked items just for you</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
+                        {data.map((product:any)=>(
+                        <ProductCard
+                            key={product._id}
+                            id={product._id}
+                            images={product.images}
+                            productName={product.productName}
+                            category={product.category.title}
+                            price={product.price}
+                        />
+                    ))}
         </div>
         <div className="text-center">
           <Link href='/Products'>

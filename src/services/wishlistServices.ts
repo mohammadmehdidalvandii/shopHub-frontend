@@ -1,15 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
+import { useAuthStore } from "@/store/authStore";
 
 const API_URL = 'http://localhost:3000/api/wishlist/';
 
 export  const useAddToWishlist = ()=>{
+    const {user} = useAuthStore.getState()
     return useMutation({
-        mutationFn:async ({id , productID}:{id:string , productID:string})=>{
-            const res =  await fetchWithAuth(`${API_URL}add/${id}`,{
+        mutationFn:async (productID:string)=>{
+            const res =  await fetch(`${API_URL}add/${user?._id}`,{
                 method:"POST",
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify(productID),
+                body:JSON.stringify({product:productID}),
             });
 
             if(!res.ok){
