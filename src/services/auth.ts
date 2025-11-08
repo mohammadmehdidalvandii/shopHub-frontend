@@ -96,10 +96,8 @@ export const useLogoutMutation = ()=>{
 } 
 
 export  const getToken = ()=>{
-    const authStore= useAuthStore.getState()
-    const token = authStore.token;
-    const accessTokenExpiry = authStore.accessTokenExpiry; 
-
+    const {token , accessTokenExpiry}= useAuthStore.getState()
+    console.log("token get", token);
     if(!token || !accessTokenExpiry){
         return null
     };
@@ -111,7 +109,7 @@ export  const getToken = ()=>{
 };
 
 export const getUserInfo = ()=>{
-    const {user} = useAuthStore();
+    const {user} = useAuthStore.getState();
 
     if(!user){
         return null;
@@ -132,24 +130,33 @@ export const refreshToken = async () =>{
     };
 
     const data = await res.json();
-    localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('token', data?.data);
     localStorage.setItem('accessTokenExpiry', (Date.now()+15 * 60 *1000).toString());
 
       const { login } = useAuthStore.getState();
-  const currentUser = getUserInfo();
-  if (currentUser) {
-    login(data.accessToken, currentUser);
+    
+              const userRes = await fetch(`${API_URL}profile`,{
+                headers:{Authorization :`Bearer ${data.data}`},
+            });
+
+            if(!userRes.ok){
+                throw new Error('Failed to fetch user info');
+            };
+
+            const user = await userRes.json();
+
+  if (user) {
+    login(data.data, user.data);
   }
 
-    return data.accessToken
+    return data.data
 };
 
 export const getValidToken = async ()=>{
-    let token =  getToken();
+    let {  token} = useAuthStore.getState();
      if(token) return token;
 
      token = await refreshToken();
-
      return token
 };
 

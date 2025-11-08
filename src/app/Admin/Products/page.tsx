@@ -5,6 +5,7 @@ import ProductsHeader from '@/components/templates/admin/products/ProductsHeader
 import ProductsStats from '@/components/templates/admin/products/ProductsStats/ProductsStats';
 import ProductList from '@/components/templates/admin/products/ProductList/ProductList';
 import { useGetAllProducts } from '@/services/productServices';
+import { getToken } from '@/services/auth';
 
 
 
