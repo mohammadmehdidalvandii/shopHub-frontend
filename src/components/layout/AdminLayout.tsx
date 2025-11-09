@@ -34,8 +34,6 @@ export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
   return (
     <div className="min-h-screen bg-white">
         <Navigation/>
-        <QueryProvider>
-            <ToasterProvider/>
             <div className="flex">
                 <div className={` transition-all duration-300  ${sidebarOpen ? 'w-54 fixed' : 'w-12 overflow-hidden'}`}>
                     <SidebarAdmin text={sidebarOpen? true :false}/>
@@ -68,7 +66,6 @@ export function AdminLayout({children}:AdminLayoutProps):React.JSX.Element {
                     </main>
                 </div>
             </div>
-        </QueryProvider>
     </div>
   )
 }
