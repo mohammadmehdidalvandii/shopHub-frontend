@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Navigation from '@/components/modules/Navigation/Navigation';
 import ProfileHeader from '@/components/templates/profile/ProfileHeader/ProfileHeader';
 import ProfileTabs from '@/components/templates/profile/ProfileTabs/ProfileTabs';
+import ProfileLayout from '@/components/layout/ProfileLayout';
 
 
 export const metadata: Metadata = {
@@ -12,11 +13,10 @@ export const metadata: Metadata = {
 
 const page:React.FC = ()=>{
   return (
-    <div className="min-h-screen bg-white">
-        <Navigation/>
-        <ProfileHeader/>
-        <ProfileTabs/>
-    </div>
+    <ProfileLayout>
+      <ProfileHeader/>
+      <ProfileTabs/>
+    </ProfileLayout>
   )
 }
 
