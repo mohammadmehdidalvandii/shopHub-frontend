@@ -2,12 +2,20 @@ import { Button } from '@/components/ui/Button';
 import { Heart, Share2, ShoppingCart, Star } from 'lucide-react';
 import React from 'react';
 
-const ProductInfo:React.FC = ()=>{
+interface ProductInfoProps{
+    id:string
+    category:string,
+    name:string,
+    price:string,
+    description:string,
+}
+
+const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , description})=>{
   return (
     <div className="flex flex-col">
         <div className="mb-4">
-            <p className="text-gray-medium mb-2 text-xl">Product category</p>
-            <h1 className="text-4xl font-robotoBold font-bold mb-4">Product Name</h1>
+            <p className="text-gray-medium mb-2 text-xl">{category}</p>
+            <h1 className="text-4xl font-robotoBold font-bold mb-4">{name}</h1>
             <div className="flex items-center gap-2 mb-6">
                 <div className="flex">
                     <Star className='h-5 w-5 fill-accent text-accent'/>
@@ -18,8 +26,8 @@ const ProductInfo:React.FC = ()=>{
                 </div>
                 <span className="text-gray-medium">(247 reviews)</span>
             </div>
-                <p className="text-4xl font-robotoBold font-bold text-primary mb-6">$899.99</p>
-                <p className="text-gray-medium mb-8">Stay connected with the latest smart watch technology. Track your fitness, monitor your health, and stay in touch with notifications right on your wrist.</p>
+                <p className="text-4xl font-robotoBold font-bold text-primary mb-6">${price}</p>
+                <p className="text-gray-medium mb-8">{description}</p>
         </div>
         <div className="flex gap-6 mb-8">
             <Button

@@ -55,7 +55,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
 
             <div className="p-4">
                 <p className="text-lg text-gray-dark mb-1">{category}</p>
-            <Link href={`/products/${id}`} className='text-xl font-robotoBold font-bold mb-2 line-clamp-1'>
+            <Link href={`/Products/${id}`} className='text-xl font-robotoBold font-bold mb-2 line-clamp-1'>
                 <h3 className="text-xl font-robotoBold font-bold mb-2 line-clamp-1">{productName}</h3>
             </Link>
                 <p className="text-3xl font-robotoBlack font-black  text-primary">${price}</p>

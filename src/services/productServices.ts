@@ -35,11 +35,30 @@ export const useGetAllProducts = ()=>{
             const data = await res.json();
             return data.data
         },
-        retry:2,
-        refetchOnWindowFocus:false,
+
     })
 };
 
+export const useGetProductById = (id:any)=>{
+    return useQuery({
+        queryKey:['product', id],
+        queryFn:async ()=>{
+            const res  = await fetch(`${API_URL}${id}`,{
+                method:"GET",
+            });
+
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Failed to fetch product');
+            };
+            const data = await res.json();
+            return data.data
+        },
+        enabled: !!id,
+        retry:2,
+        refetchOnWindowFocus:false,
+    })
+}
 
 export const useDeleteProduct = ()=>{
     return useMutation({
