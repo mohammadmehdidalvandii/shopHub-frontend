@@ -7,13 +7,24 @@ import React, { useState } from 'react'
 
 const Products:React.FC = ()=>{
     const [selectedCategory, setSelectCategory] = useState<string>('all');
+    const [sortOption , setSortOption] = useState<string>('featured');
 
     const categories = ['all', 'electronics','audio','wearables','accessories'];
 
 
     const {data , isError , isLoading} = useGetAllProducts();
 
-    const filteredProducts = selectedCategory === 'all' ? data :data.filter((product:any)=>product.category.title === selectedCategory);
+const filteredProducts = data ? (selectedCategory === 'all' ? data : data.filter((product: any) => product.category.title === selectedCategory)) : [];
+    const sortedProducts = [...filteredProducts].sort((a:any , b:any)=>{
+        switch(sortOption){
+            case 'price-low':
+                return a.price - b.price;
+            case 'price-high':
+                return b.price - a.price;
+            default:
+                return 0 
+        }
+    })
 
     if (isLoading) {
     return <p>Loading...</p>;
@@ -44,7 +55,7 @@ const Products:React.FC = ()=>{
                     ))}
                 </div>
                 <div className="md:ml-auto">
-                    <Select>
+                    <Select onValueChange={(value)=>setSortOption(value)}>
                         <SelectTrigger className='w-[140px]'>
                             <SelectValue placeholder="Sort by"/>
                         </SelectTrigger>
@@ -52,18 +63,17 @@ const Products:React.FC = ()=>{
                             <SelectItem value='featured' className='font-robotBold font-bold hover:text-white'>Featured</SelectItem>
                             <SelectItem value='price-low' className='font-robotBold font-bold hover:text-white'>Price: Low to High</SelectItem>
                             <SelectItem value='price-high' className='font-robotBold font-bold hover:text-white'>Price: High to Low</SelectItem>
-                            <SelectItem value='name' className='font-robotBold font-bold hover:text-white'>Name</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
             </div>
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
-  {filteredProducts.length === 0 ? (
-    <p className="text-gray-medium text-2xl col-span-full text-center">
+  {sortedProducts.length === 0 ? (
+    <p className="text-gray-medium text-2xl col-span-full text-center"> 
       No products found in this category.
     </p>
   ) : (
-    filteredProducts.map((product: any) => (
+    sortedProducts.map((product: any) => (
       <ProductCard
         key={product._id}
         id={product._id}
