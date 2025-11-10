@@ -21,7 +21,9 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
 
   const addToWishlist =  useAddToWishlist();
 
-    const handlerAddToWishlist = (productID:string)=>{
+    const handlerAddToWishlist = (productID:string , e:React.MouseEvent)=>{
+      e.preventDefault();
+      e.stopPropagation();
         addToWishlist.mutate(productID ,{
           onSuccess:()=>{
             showSuccess('Add product to wishlist');
@@ -33,6 +35,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
     }
 
   return (
+  <Link href={`/Products/${id}`} className='text-xl font-robotoBold font-bold mb-2 line-clamp-1'>
       <Card className='group overflow-hidden hover:shadow-lg transition-all duration-300' >
         <CardContent>
 <div className="aspect-square bg-gray-light relative">
@@ -47,7 +50,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
     size="icon"
     variant="outline"
     className="absolute top-2 right-2 bg-gray-light backdrop-blur-sm z-50"
-    onClick={() => handlerAddToWishlist(id)}
+    onClick={(e) => handlerAddToWishlist(id ,e)}
   >
     <Heart className="h-4 w-4"/>
   </Button>
@@ -55,9 +58,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
 
             <div className="p-4">
                 <p className="text-lg text-gray-dark mb-1">{category}</p>
-            <Link href={`/Products/${id}`} className='text-xl font-robotoBold font-bold mb-2 line-clamp-1'>
                 <h3 className="text-xl font-robotoBold font-bold mb-2 line-clamp-1">{productName}</h3>
-            </Link>
                 <p className="text-3xl font-robotoBlack font-black  text-primary">${price}</p>
             </div>
         </CardContent>
@@ -69,6 +70,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
             </Button>
         </CardFooter>
     </Card>
+              </Link>
   )
 }
 
