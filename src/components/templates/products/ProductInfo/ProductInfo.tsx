@@ -1,4 +1,7 @@
+"use client"
 import { Button } from '@/components/ui/Button';
+import { useAddToWishlist } from '@/services/wishlistServices';
+import { showError, showSuccess } from '@/utils/Toasts';
 import { Heart, Share2, ShoppingCart, Star } from 'lucide-react';
 import React from 'react';
 
@@ -11,6 +14,21 @@ interface ProductInfoProps{
 }
 
 const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , description})=>{
+
+    const addToWishlist = useAddToWishlist();
+
+    const handlerAddToWishlist = (productID:string)=>{
+        addToWishlist.mutate(productID,{
+            onSuccess:()=>{
+                showSuccess('Add product to wishlist');
+            },
+            onError:(error:any)=>{
+                showError(error.message || 'Add to wishlist failed')
+            }
+        })
+    }
+
+
   return (
     <div className="flex flex-col">
         <div className="mb-4">
@@ -41,6 +59,7 @@ const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , de
             <Button
             size='icon'
             variant='outline'
+            onClick={()=>handlerAddToWishlist(id)}
             >
                 <Heart className='h-5 w-5'/>
             </Button>
