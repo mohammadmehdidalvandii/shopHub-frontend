@@ -12,7 +12,10 @@ const Products:React.FC = ()=>{
 
 
     const {data , isError , isLoading} = useGetAllProducts();
-          if (isLoading) {
+
+    const filteredProducts = selectedCategory === 'all' ? data :data.filter((product:any)=>product.category.title === selectedCategory);
+
+    if (isLoading) {
     return <p>Loading...</p>;
   }
   if (isError) {
@@ -54,18 +57,24 @@ const Products:React.FC = ()=>{
                     </Select>
                 </div>
             </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
-                    {data.map((product:any)=>(
-                        <ProductCard
-                            key={product._id}
-                            id={product._id}
-                            images={product.images}
-                            productName={product.productName}
-                            category={product.category.title}
-                            price={product.price}
-                        />
-                    ))}
-                </div>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+  {filteredProducts.length === 0 ? (
+    <p className="text-gray-medium text-2xl col-span-full text-center">
+      No products found in this category.
+    </p>
+  ) : (
+    filteredProducts.map((product: any) => (
+      <ProductCard
+        key={product._id}
+        id={product._id}
+        images={product.images}
+        productName={product.productName}
+        category={product.category.title}
+        price={product.price}
+      />
+    ))
+  )}
+</div>
         </div>
     </section>
   )
