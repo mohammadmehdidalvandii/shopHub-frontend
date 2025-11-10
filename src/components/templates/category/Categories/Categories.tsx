@@ -6,19 +6,33 @@ import { Checkbox } from '@/components/ui/Checkbox'
 import { Label } from '@/components/ui/Label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select'
 import { Slider } from '@/components/ui/Slider'
+import { useGetAllProducts } from '@/services/productServices'
 import { SlidersHorizontal } from 'lucide-react'
 import React, { useState } from 'react'
 
-
+interface ProductCateProps{
+    slug:string,
+}
 
 const brands = ["Apple", "Samsung", "Sony", "Bose", "Nike"];
-const Categories:React.FC = ()=>{
+const Categories:React.FC<ProductCateProps> = ({slug})=>{
     const [priceRange , setPriceRange] = useState([0, 10_000]);
+
+    const {data , isError , isLoading} = useGetAllProducts();
+        
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+    if (isError) {
+        return <p>Failed to load Products</p>;
+    }
+    const filteredCategory = data ? data.filter((product:any) => product.category.title === slug.toLowerCase()) : [];
+
   return (
     <section>
         <div className="container mx-auto px-4 py-8">
             <div className="mb-8">
-                <h1 className="text-4xl font-robotoBlack font-black mb-2">Category Name</h1>
+                <h1 className="text-4xl font-robotoBlack font-black mb-2">Category - {slug}</h1>
                 <p className="text-gray-medium text-xl">Showing counts Products </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -88,7 +102,7 @@ const Categories:React.FC = ()=>{
                 </aside>
                 <div className="col-span-3">
                     <div className="flex justify-between items-center mb-6">
-                        <p className="text-lg text-gray-dark">Counts products found</p>
+                        <p className="text-lg text-gray-dark">Counts products found  {filteredCategory.length}</p>
                         <Select>
                             <SelectTrigger className='w-[170px]'>
                                 <SelectValue placeholder='Sort by'/>
@@ -103,11 +117,22 @@ const Categories:React.FC = ()=>{
                         </Select>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
-                        <ProductCard/>
+  {filteredCategory.length === 0 ? (
+    <p className="text-gray-medium text-2xl col-span-full text-center"> 
+      No products found in this category.
+    </p>
+  ) : (
+    filteredCategory.map((product: any) => (
+      <ProductCard
+        key={product._id}
+        id={product._id}
+        images={product.images}
+        productName={product.productName}
+        category={product.category.title}
+        price={product.price}
+      />
+    ))
+  )}
                     </div>
                 </div>
             </div>

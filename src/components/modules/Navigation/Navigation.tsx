@@ -23,7 +23,7 @@
             {href:"/",label:"Home"},
             {href:"/Products",label:"Products"},
             {href:"/Category/Electronics",label:"Electronics"},
-            {href:"/Category/Audio",label:"Audio"},
+            {href:"/Category/Accessories",label:"Accessories"},
             {href:"/About",label:"About"},
             {href:"/Contact",label:"Contact"},
         ]
