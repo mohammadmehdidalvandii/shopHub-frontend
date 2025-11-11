@@ -48,6 +48,7 @@ const ProductDetails:React.FC<ProductIdProps> = ({id})=>{
                 name={data.productName}
                 price={data.price}
                 description={data.description}
+                images={data.images[0]}
                 />
             </div>
             {/* Products Details Tabs */}

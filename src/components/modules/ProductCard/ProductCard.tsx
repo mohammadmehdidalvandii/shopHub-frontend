@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { useAddToWishlist } from '@/services/wishlistServices';
 import { showError, showSuccess } from '@/utils/Toasts';
+import { useCartStore } from '@/store/cartStore';
 
 interface productProps{
     id:string,
@@ -20,6 +21,7 @@ interface productProps{
 const ProductCard:React.FC<productProps> = ({id , images , productName , category , price})=>{
 
   const addToWishlist =  useAddToWishlist();
+  const {addToCart} = useCartStore()
 
     const handlerAddToWishlist = (productID:string , e:React.MouseEvent)=>{
       e.preventDefault();
@@ -32,6 +34,20 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
             showError(error.message || 'Add to wishlist failed')
           }
         })
+    };
+
+    const handlerAddToBasket = (e:React.MouseEvent , {id , images , productName , category , price}:{id:string, images:string[], productName:string, category:string, price:string})=>{
+      e.preventDefault();
+      e.stopPropagation();
+
+      addToCart({
+        _id:id,
+        productName,
+        price,
+        images:images,
+        category:{title:category}
+      })
+      showSuccess('Product added to Basket')
     }
 
   return (
@@ -64,6 +80,8 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
         </CardContent>
         <CardFooter className='p-4 pt-0'>
             <Button className='w-full h-10' variant="accent"
+            type='button'
+            onClick={(e)=>handlerAddToBasket(e , {id , images , productName , category , price})}
             >
             <ShoppingCart className='mr-2 h-4 w-4' />
             Add to Cart

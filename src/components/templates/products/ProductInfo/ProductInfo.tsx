@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/Button';
 import { useAddToWishlist } from '@/services/wishlistServices';
+import { useCartStore } from '@/store/cartStore';
 import { showError, showSuccess } from '@/utils/Toasts';
 import { Heart, Share2, ShoppingCart, Star } from 'lucide-react';
 import React from 'react';
@@ -10,13 +11,15 @@ interface ProductInfoProps{
     category:string,
     name:string,
     price:string,
+    images:string[]
     description:string,
 }
 
-const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , description})=>{
+const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , images , price , description})=>{
 
     const addToWishlist = useAddToWishlist();
-
+    const {addToCart } = useCartStore();
+ 
     const handlerAddToWishlist = (productID:string)=>{
         addToWishlist.mutate(productID,{
             onSuccess:()=>{
@@ -28,6 +31,19 @@ const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , de
         })
     }
 
+        const handlerAddToBasket = (e:React.MouseEvent , {id , images , name , category , price}:{id:string, images:string[], name:string, category:string, price:string})=>{
+          e.preventDefault();
+          e.stopPropagation();
+    
+          addToCart({
+            _id:id,
+            productName:name,
+            price,
+            images:images,
+            category:{title:category}
+          })
+          showSuccess('Product added to Basket')
+        }
 
   return (
     <div className="flex flex-col">
@@ -52,6 +68,7 @@ const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , price , de
             size='lg'
             variant='accent'
             className='flex-1'
+            onClick={(e)=>handlerAddToBasket(e , {id , images , name , category , price})}
             >
                 <ShoppingCart className='mr-2 h-5 w-5'/>
                 Add to Cart
