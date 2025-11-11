@@ -5,6 +5,9 @@
     import {Search , User ,  ShoppingCart, Menu} from 'lucide-react'
     import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/Sheet'
     import { useAuthStore } from '@/store/authStore'
+import dynamic from 'next/dynamic'
+
+    const SearchModel = dynamic(()=>import('@/components/models/SearchModel'));
 
     const Navigation = ()=>{
         const [isOpen , setIsOpen] = useState(false);
@@ -39,9 +42,7 @@
                     ))}
                 </div>
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon">
-                        <Search className='h-5 w-5'/>
-                    </Button>
+                    <SearchModel/>
                     {user?.role  ?(
                      <Link href={user?.role === 'ADMIN' ?'/Admin' :'/Profile'}>
                     <Button variant={user.role ?'outline' :'ghost'} size={user.role ? 'lg' :'sm'}>
