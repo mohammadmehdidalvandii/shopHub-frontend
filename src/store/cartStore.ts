@@ -5,7 +5,7 @@ interface Product {
   _id: string;
   productName: string;
   price: string;
-  images: string[];
+  images: string;
   category: { title: string };
   quantity?: number;
 }

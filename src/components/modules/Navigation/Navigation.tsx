@@ -6,10 +6,12 @@
     import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/Sheet'
     import { useAuthStore } from '@/store/authStore'
 import dynamic from 'next/dynamic'
+import { useCartStore } from '@/store/cartStore'
 
     const SearchModel = dynamic(()=>import('@/components/models/SearchModel'));
-
+    
     const Navigation = ()=>{
+        const {cart } = useCartStore()
         const [isOpen , setIsOpen] = useState(false);
         const [isClient , setIsClient] = useState(false);
         const {user} = useAuthStore();
@@ -61,7 +63,7 @@ import dynamic from 'next/dynamic'
                     <Link href="/Cart">
                         <Button variant="ghost" size="icon"  className='relative'>
                             <ShoppingCart className='h-5 w-5'/>
-                            <span className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">0</span>
+                            <span className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">{cart.length}</span>
                         </Button>
                     </Link>
                     {/* Mobile menu */}
