@@ -12,7 +12,8 @@ interface ProfileLayoutProps {
 
 const ProfileLayout:React.FC<ProfileLayoutProps> = ({children})=>{
     const router = useRouter()
-    const {token} = useAuthStore.getState();
+    const token = useAuthStore((state) => state.token);
+    console.log("token ", token);
     useEffect(()=>{
         if(!token){
            router.replace('/Auth')
