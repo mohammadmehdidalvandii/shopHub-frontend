@@ -5,15 +5,27 @@ import React from 'react';
 import products from '../../../../../public/assets/images/product.png'
 import { Button } from '@/components/ui/Button';
 import { Minus, Plus, Trash2 } from 'lucide-react';
-import { showSuccess } from '@/utils/Toasts';
+import { showError, showSuccess } from '@/utils/Toasts';
 import Link from 'next/link';
 import EmptyCart from '../EmptyCart/EmptyCart';
 import { useCartStore } from '@/store/cartStore';
 
 const Basket:React.FC = ()=>{
-    const {cart} = useCartStore();
+    const {cart , removeFromCart , clearCart} = useCartStore();
     console.log('cart =>', cart)
 
+    const handlerRemovedCard = (cartID:string)=>{
+        removeFromCart(cartID);
+        showSuccess('Delete Product your basket')
+    }
+    const handlerRemoveAllCart = ()=>{
+        if(cart.length){
+            clearCart();
+            showSuccess('clear All product for basket')
+        }else(
+            showError('Basket is empty')
+        )
+    }
 
   return (
     <section>
@@ -40,6 +52,7 @@ const Basket:React.FC = ()=>{
                                         <Button
                                         variant="ghost"
                                         size='icon'
+                                        onClick={()=>handlerRemovedCard(basket._id)}
                                         ><Trash2 className='h-4 w-4'/>
                                         </Button>
                                     </div>
@@ -70,7 +83,7 @@ const Basket:React.FC = ()=>{
                     <Button
                     variant='outline'
                     size='lg'
-                    onClick={()=>showSuccess('Cart Cleared')}
+                    onClick={handlerRemoveAllCart}
                     >
                         Clear Cart
                     </Button>
