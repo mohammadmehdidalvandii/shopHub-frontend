@@ -11,7 +11,7 @@ import EmptyCart from '../EmptyCart/EmptyCart';
 import { useCartStore } from '@/store/cartStore';
 
 const Basket:React.FC = ()=>{
-    const {cart , removeFromCart , clearCart} = useCartStore();
+    const {cart , removeFromCart , clearCart , decreaseQuantity , increaseQuantity} = useCartStore();
     console.log('cart =>', cart)
 
     const handlerRemovedCard = (cartID:string)=>{
@@ -25,6 +25,13 @@ const Basket:React.FC = ()=>{
         }else(
             showError('Basket is empty')
         )
+    }
+
+    const handlerDecrease = (cardID:string)=>{
+        decreaseQuantity(cardID)
+    }
+    const handlerIncrease = (cardID:string)=>{
+        increaseQuantity(cardID)
     }
 
   return (
@@ -61,6 +68,7 @@ const Basket:React.FC = ()=>{
                                             <Button 
                                             variant='outline'
                                             size='icon'
+                                            onClick={()=>handlerDecrease(basket._id)}
                                             >
                                                 <Minus className='h-4 w-4'/>
                                             </Button>
@@ -68,6 +76,7 @@ const Basket:React.FC = ()=>{
                                              <Button 
                                             variant='outline'
                                             size='icon'
+                                            onClick={()=>handlerIncrease(basket._id)}
                                             >
                                                 <Plus className='h-4 w-4'/>
                                             </Button>
