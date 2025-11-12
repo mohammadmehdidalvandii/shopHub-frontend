@@ -12,7 +12,12 @@ import { useCartStore } from '@/store/cartStore';
 
 const Basket:React.FC = ()=>{
     const {cart , removeFromCart , clearCart , decreaseQuantity , increaseQuantity} = useCartStore();
-    console.log('cart =>', cart)
+
+    const subtotal = cart.reduce((total , item)=>total + Number(item.price) * (item.quantity || 1),0);
+    const shipping = 0;
+    const tax = subtotal * 0.1;
+    const total = subtotal + tax + shipping ;
+
 
     const handlerRemovedCard = (cartID:string)=>{
         removeFromCart(cartID);
@@ -104,7 +109,7 @@ const Basket:React.FC = ()=>{
                             <div className="space-y-4 mb-6">
                                 <div className="flex justify-between text-xl">
                                     <span className="text-gray-medium">Subtotal</span>
-                                    <span className="font-semibold">$899.99</span>
+                                    <span className="font-semibold">${subtotal.toFixed(2)}</span>
                                 </div>
                             </div>
                             <div className="space-y-4 mb-6">
@@ -116,14 +121,14 @@ const Basket:React.FC = ()=>{
                             <div className="space-y-4 mb-6">
                                 <div className="flex justify-between text-xl">
                                     <span className="text-gray-medium">Tax</span>
-                                    <span className="font-semibold">$90.00</span>
+                                    <span className="font-semibold">${tax.toFixed(2)}</span>
                                 </div>
                             </div>
                             <div className="border-t border-input pt-4">
                                 <div className="space-y-4 mb-6">
                                     <div className="flex justify-between text-2xl">
                                         <span className="text-text font-robotoBlack font-black">Total</span>
-                                        <span className="font-bold text-primary">$989.99</span>
+                                        <span className="font-bold text-primary">${total.toFixed(2)}</span>
                                     </div>
                                 </div>
                             </div>
