@@ -137,6 +137,7 @@ const Basket:React.FC = ()=>{
                                 variant='accent'
                                 size="lg"
                                 className='w-full'
+                                disabled={cart?.length === 0}
                                 >
                                     Proceed to CheckOut               
                                 </Button>
