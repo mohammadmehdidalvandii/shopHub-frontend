@@ -1,7 +1,8 @@
 import { useAuthStore } from "@/store/authStore";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
-const API_URL = 'http://localhost:3000/api/orders/'
+const API_URL = 'http://localhost:3000/api/orders/';
+
 
 export const useGetOrderByUser = ()=>{
     const {user} = useAuthStore();
@@ -25,6 +26,38 @@ export const useGetOrderByUser = ()=>{
         refetchOnWindowFocus:false,
     })
 };
+
+export const useCreateOrder = ()=>{
+     const queryClient = useQueryClient();
+     const {user} = useAuthStore();
+     const userID = (user as any)._id;
+
+    return useMutation({
+        mutationFn: async (orderData:any)=>{
+            const payload = {
+                user:userID,
+                ...orderData,
+            }
+            console.log("payload", payload)
+            const res = await fetchWithAuth(`${API_URL}create`,{
+                method:"POST",
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify(payload)
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Failed to create order')
+            };
+
+            const data = await res.json();
+            return data.data
+        },
+        onSuccess: ()=>{
+            queryClient.invalidateQueries({queryKey:['userOrders , Orders']})
+        }
+    })
+}
+
 
 export const useGetAllOrders = ()=>{
     return useQuery({
