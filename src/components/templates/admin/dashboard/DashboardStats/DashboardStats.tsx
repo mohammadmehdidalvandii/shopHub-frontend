@@ -36,7 +36,7 @@ const totalRevenue = orders.reduce((sum: number, order: any) => {
             </div>
             <div>
                 <p className="text-lg text-gray-medium mb-1">Total Revenue</p>
-                <p className="text-3xl font-bold">${totalRevenue}</p>
+                <p className="text-3xl font-bold">${Number(totalRevenue).toFixed(2)}</p>
                 <p className="text-lg text-gray-medium mt-2">+5,231 from last month</p>
             </div>
           </CardContent>

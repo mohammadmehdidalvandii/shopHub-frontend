@@ -13,6 +13,8 @@ interface orderProps {
 const OrdersAdminModel: React.FC<orderProps> = ({order}) => {
   const [isShow, setIsShow] = useState<boolean>(false);
 
+  const subtotal = order.items.reduce((total , item)=> total + Number(item.price) * (item.quantity || 0),0);
+
   return (
     <Dialog open={isShow} onOpenChange={setIsShow}>
       <DialogTrigger asChild>
@@ -49,7 +51,7 @@ const OrdersAdminModel: React.FC<orderProps> = ({order}) => {
                     </div>
                     <div>
                         <p className="text-lg text-gray-medium">Total Amount</p>
-                        <p className="text-xl font-robotBold font-semibold">${order.totalAmount}</p>
+                        <p className="text-xl font-robotBold font-semibold">${Number(order.totalAmount).toFixed(2)}</p>
                     </div>
                 </div>
                 <div className="border-t pt-4">
@@ -71,24 +73,25 @@ const OrdersAdminModel: React.FC<orderProps> = ({order}) => {
                 </div>
                 <div className="border-t pt-4">
                     <h3 className="font-robotBold font-semibold text-xl mb-4">Order Items</h3>
+
                     {order.items.map((item)=>(
-                    <div className="space-y-3" key={item.product._id}>
+                    <div className="space-y-3 mb-2" key={item.product._id}>
                         <div className="flex items-center justify-between p-4 bg-gray-light rounded-lg">
                             <div className="flex-1">
                                 <p className="font-robotoMedium text-xl">Name:{item.product.productName}</p>
                                 <div className="flex gap-4 mt-1">
                                     <p className="text-lg text-gray-medium">SKU:{item.product.productSKU}</p>
-                                    <p className="text-lg text-gray-medium">Quantity:2</p>
+                                    <p className="text-lg text-gray-medium">Quantity:{item.quantity}</p>
                                 </div>
                             </div>
-                            <p className="font-robotoBold font-semibold text-lg">${item.product.price}</p>
-                        </div>
-                        <div className="mt-4 pt-4 border-t flex justify-between items-center">
-                            <p className="font-robotBold font-semibold text-xl">Subtotal</p>
-                            <p className="font-robotBold font-bold text-2xl text-primary">${item.product.price}</p>
+                            <p className="font-robotoBold font-semibold text-lg">${(Number(item.product.price) * Number(item.quantity)).toFixed(2)}</p>
                         </div>
                     </div>
                     ))}
+                        <div className="mt-4 pt-4 border-t flex justify-between items-center">
+                            <p className="font-robotBold font-semibold text-xl">Subtotal</p>
+                            <p className="font-robotBold font-bold text-2xl text-primary">${subtotal.toFixed(2)}</p>
+                        </div>
                 </div>
                 <div className="border-t pt-4 grid grid-cols-2 gap-6">
                     <div>

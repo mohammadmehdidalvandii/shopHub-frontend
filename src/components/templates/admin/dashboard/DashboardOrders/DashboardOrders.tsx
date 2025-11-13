@@ -37,7 +37,7 @@ const DashboardOrders:React.FC = ()=>{
                         <p className="text-sm text-gray-medium mt-1">{new Date(order.createdAt).toLocaleDateString()}</p>
                     </div>
                     <div className="text-right">
-                        <p className="font-robotoBold font-bold text-primary">${order.totalAmount}</p>
+                        <p className="font-robotoBold font-bold text-primary">${Number(order.totalAmount).toFixed(2)}</p>
                         <Badge
                           variant={
                             order.status === "completed"

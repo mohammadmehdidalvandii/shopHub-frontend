@@ -143,7 +143,7 @@ const OrderList: React.FC<OrdersListProps> = ({ orders, error, loading }) => {
                         <div>
                           <p className="text-gray-medium">Total Amount</p>
                           <p className="font-semibold text-primary text-xl">
-                            ${order.totalAmount}
+                            ${Number(order.totalAmount).toFixed(2)}
                           </p>
                           <p className="text-gray-medium">
                             {orders.length} items

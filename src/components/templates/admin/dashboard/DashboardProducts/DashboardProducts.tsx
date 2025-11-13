@@ -40,7 +40,7 @@ const DashboardProducts:React.FC = ()=>{
                             </div>
                         </div>
                         <div className="text-right">
-                            <p className="font-roboto-bold text-primary">${product.price}</p>
+                            <p className="font-roboto-bold text-primary">${Number(product.price).toFixed(2)}</p>
                         </div>
                     </div>
                     ))}

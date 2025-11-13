@@ -109,7 +109,7 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-lg">
                                         <div>
                                             <p className="text-gray-medium text-sm">price</p>
-                                            <p className="font-robotoBold font-bold text-primary">${product.price}</p>
+                                            <p className="font-robotoBold font-bold text-primary">${Number(product.price).toFixed(2)}</p>
                                         </div>
                                         <div>
                                             <p className="text-gray-medium text-sm">Stock</p>
