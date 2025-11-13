@@ -60,7 +60,7 @@ const ProfileOrders:React.FC = ()=>{
                         <div className="flex items-center justify-between pt-4 border-t border-t-border">
                             <div>
                                 <p className="text-sm text-gray-medium">{order.items.length} items</p>
-                                <p className="text-xl font-robotoBold font-bold text-primary">${order.totalAmount}</p>
+                                <p className="text-xl font-robotoBold font-bold text-primary">${Number(order.totalAmount).toFixed(2)}</p>
                             </div>
                             <div className="flex gap-2">
                                 <OrdersUserModel orders={order}/>

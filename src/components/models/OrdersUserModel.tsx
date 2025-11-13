@@ -57,7 +57,7 @@ const OrdersUserModel:React.FC<OrdersProps> = ({orders})=>{
                                 <p className="font-bold">{item.product.productName}</p>
                                 <p className="text-lg font-robotBold text-gray-medium">Quantity: {item.quantity}</p>
                             </div>
-                            <p className="font-robotBold font-semibold">${item.price}</p>
+                            <p className="font-robotBold font-semibold">${item.price.toFixed(2)}</p>
                         </div>   
                         ))}
                     </div>
