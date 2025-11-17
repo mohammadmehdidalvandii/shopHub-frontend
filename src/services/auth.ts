@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/store/authStore";
 import { showSuccess } from "@/utils/Toasts";
 import { useMutation } from "@tanstack/react-query";
+import { fetchWithAuth } from "./fetchWithAuth";
 const API_URL = 'http://localhost:3000/api/auth/';
 
 interface LoginFormData {
@@ -158,6 +159,27 @@ export const getValidToken = async ()=>{
      token = await refreshToken();
      return token
 };
+
+export const useChangePassword = ()=>{
+    return useMutation({
+        mutationFn: async ({oldPassword , newPassword}:{oldPassword:string , newPassword:string})=>{
+            const res = await fetchWithAuth(`${API_URL}change-password`,{
+                method:'PUT',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({oldPassword , newPassword}),
+            });
+
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error('Failed to change password')
+            };
+
+            const result = await res.json();
+
+            return result.data;
+        }
+    })
+}
 
 
 
