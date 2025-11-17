@@ -5,7 +5,10 @@ import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { useChangePassword } from '@/services/auth';
 import { showError, showSuccess } from '@/utils/Toasts';
+import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
+
+const DeleteAccountModel = dynamic(()=>import('@/components/models/DeleteAccountModel'))
 
 const ProfileSettings:React.FC = ()=>{
     const [oldPassword, setOldPassword] = useState('');
@@ -71,7 +74,7 @@ const ProfileSettings:React.FC = ()=>{
         </div>
         <div className="border-t border-t-border pt-6">
             <h3 className="text-xl font-semibold mb-4 text-danger">Danger Zone</h3>
-            <Button variant='destructive' size='sm'>Delete Account</Button>
+            <DeleteAccountModel/>
         </div>
     </CardContent>
    </Card>
