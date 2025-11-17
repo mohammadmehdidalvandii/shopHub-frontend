@@ -15,7 +15,7 @@ const ProfileLayout:React.FC<ProfileLayoutProps> = ({children})=>{
     const token = useAuthStore((state) => state.token);
     useEffect(()=>{
         if(!token){
-           router.replace('/Auth')
+           router.push('/Auth')
         }
     },[router , token]);
 

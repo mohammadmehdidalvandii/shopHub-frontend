@@ -1,9 +1,21 @@
+'use client'
 import React from 'react'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '../ui/AlertDialog'
 import { Button } from '../ui/Button'
-
+import { useDeleteAccount } from '@/services/auth'
+import { useAuthStore } from '@/store/authStore'
+import { useRouter } from 'next/navigation'
 
 const DeleteAccountModel:React.FC = ()=>{
+    const router =  useRouter()
+    const deleteAccount = useDeleteAccount();
+    const {logout} = useAuthStore.getState()
+    const handlerDeleteAccount = ()=>{
+        console.log("click")
+        deleteAccount.mutate();
+        window.location.reload();
+    }
+
   return (
     <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -18,7 +30,9 @@ const DeleteAccountModel:React.FC = ()=>{
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Delete Account</AlertDialogAction>
+                <AlertDialogAction 
+                onClick={handlerDeleteAccount}
+                >Delete Account</AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
     </AlertDialog>

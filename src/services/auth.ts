@@ -171,12 +171,34 @@ export const useChangePassword = ()=>{
 
             if(!res.ok){
                 const errorData = await res.json();
-                throw new Error('Failed to change password')
+                throw new Error( errorData.message ||'Failed to change password')
             };
 
             const result = await res.json();
 
             return result.data;
+        }
+    })
+};
+
+export const useDeleteAccount = ()=>{
+    return useMutation({
+        mutationFn:async ()=>{
+            const res = await fetchWithAuth(`${API_URL}delete-account`,{
+                method:"DELETE",
+            });
+            if(!res.ok){
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Failed to delete account')
+            };
+            const result = await res.json();
+            return result.data;
+        },
+        onSuccess:()=>{
+            showSuccess('Delete Account successfully');
+            localStorage.removeItem('userInfo');
+            localStorage.removeItem('token');
+            localStorage.removeItem('accessTokenExpiry')
         }
     })
 }
