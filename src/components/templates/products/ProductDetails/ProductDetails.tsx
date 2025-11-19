@@ -23,13 +23,12 @@ const ProductDetails:React.FC<ProductIdProps> = ({id})=>{
   }
    const { data, isError, isLoading } = useGetProductById(id);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-3xl font-robotoBlack font-black text-gray-medium animate-pulse">Loading product...</p>
+     if (isLoading) {
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
       </div>
-    );
-  }
+    }
+
 
   if (isError || !data) {
     return <ProductNotFound />;

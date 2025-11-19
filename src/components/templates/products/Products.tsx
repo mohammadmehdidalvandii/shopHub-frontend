@@ -26,12 +26,18 @@ const filteredProducts = data ? (selectedCategory === 'all' ? data : data.filter
         }
     })
 
-    if (isLoading) {
-    return <p>Loading...</p>;
-  }
-  if (isError) {
-    return <p>Failed to load Products</p>;
-  }
+            if (isLoading) {
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
+      </div>
+    }
+    if (isError) {
+      return (
+              <div className="content_error">
+        <p className="error">Failed to load products</p>
+      </div>
+      )
+    }
 
   return (
     <section>

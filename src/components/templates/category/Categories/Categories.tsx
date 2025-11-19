@@ -20,11 +20,17 @@ const Categories:React.FC<ProductCateProps> = ({slug})=>{
 
     const {data , isError , isLoading} = useGetAllProducts();
         
-    if (isLoading) {
-        return <p>Loading...</p>;
+            if (isLoading) {
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
+      </div>
     }
     if (isError) {
-        return <p>Failed to load Products</p>;
+      return (
+              <div className="content_error">
+        <p className="error">Failed to load products</p>
+      </div>
+      )
     }
     const filteredCategory = data ? data.filter((product:any) => product.category.title === slug.toLowerCase()) : [];
 

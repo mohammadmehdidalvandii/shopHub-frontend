@@ -9,12 +9,18 @@ import React from 'react';
 
 const DashboardOrders:React.FC = ()=>{
     const {data , isError , isLoading} = useGetAllOrders();
-       if(isLoading){
-        return <p>Loading...</p>
-    };
-     if(isError){
-        return <p>Failed to load orders</p>
-    };
+            if (isLoading) {
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
+      </div>
+    }
+    if (isError) {
+      return (
+              <div className="content_error">
+        <p className="error">Failed to load products</p>
+      </div>
+      )
+    }
   return (
     <div className="container mx-auto">
         <Card>

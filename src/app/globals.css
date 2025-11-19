@@ -56,6 +56,7 @@
     --gradient-hero: linear-gradient(135deg , #3f51f4 , #7f8fff);
     --gradient-accent: linear-gradient(90deg ,#ff8c34 , #3f51f4,);
     --gradient-danger: linear-gradient(45deg ,#f44336 , #993333,);
+  
   }
   body{
     margin: 0;
@@ -63,4 +64,17 @@
     box-sizing: border-box;
     @apply bg-white text-text font-robotBold
   }
+  .content_title{
+    @apply flex justify-center items-center h-64
+  }
+  .title{
+    @apply text-2xl text-gray-500 animate-pulse
+  }
+  .content_error{
+    @apply flex justify-center items-center h-64
+  }
+  .error{
+    @apply text-2xl text-red-500 font-robotoBlack font-black
+  }
 }
+

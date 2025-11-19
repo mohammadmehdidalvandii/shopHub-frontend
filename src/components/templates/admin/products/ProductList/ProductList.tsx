@@ -43,12 +43,18 @@ const ProductList:React.FC<productData> = ({products , error , loading})=>{
         })
     },[products, searchItem , categoryFilter])
 
-      if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Failed to load orders</p>;
-  }
+            if (loading) {
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
+      </div>
+    }
+    if (error) {
+      return (
+              <div className="content_error">
+        <p className="error">Failed to load products</p>
+      </div>
+      )
+    }
 
 
     if (products.length === 0) {

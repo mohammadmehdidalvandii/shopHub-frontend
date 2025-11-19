@@ -8,10 +8,16 @@ import React from 'react'
 const FeaturedProducts:React.FC = ()=>{
       const {data , isError , isLoading} = useGetAllProducts();
             if (isLoading) {
-      return <p>Loading...</p>;
+      return  <div className="content_title">
+        <p className="title">Loading products...</p>
+      </div>
     }
     if (isError) {
-      return <p>Failed to load Products</p>;
+      return (
+              <div className="content_error">
+        <p className="error">Failed to load products</p>
+      </div>
+      )
     }
   return (
     <section className="py-16 container mx-auto px-4">
