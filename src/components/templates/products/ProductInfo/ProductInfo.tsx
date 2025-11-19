@@ -39,7 +39,7 @@ const ProductInfo:React.FC<ProductInfoProps> = ({id, category, name , images , p
             _id:id,
             productName:name,
             price,
-            images:images,
+            images:images[1],
             category:{title:category}
           })
           showSuccess('Product added to Basket')

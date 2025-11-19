@@ -37,12 +37,12 @@ const CheckoutInfo:React.FC = ()=>{
     const addOrder = useCreateOrder();
 
     const handlerPayOrder =()=>{
-        if(!cart.length){
+        if(!cart || cart.length === 0){
             return showError('Basket is empty')
         };
 
         const items = cart.map((item)=>({
-            product:item._id,
+            product:item?._id,
             quantity:Number(item.quantity),
             price:Number(item.price)
         }));

@@ -44,7 +44,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
         _id:id,
         productName,
         price,
-        images:images,
+        images:images[1],
         category:{title:category}
       })
       showSuccess('Product added to Basket')

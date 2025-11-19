@@ -1,3 +1,4 @@
+"use client"
 import Footer from '@/components/modules/Footer/Footer';
 import Navigation from '@/components/modules/Navigation/Navigation';
 import CheckoutInfo from '@/components/templates/checkout/CheckoutInfo/CheckoutInfo';
