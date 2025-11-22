@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-const API_URL = 'http://localhost:3000/api/categories/'
+const API_URL = 'https://shophubapi.chbk.app/api/categories/'
 
 export const useGetCategory = ()=>{
     return useQuery({

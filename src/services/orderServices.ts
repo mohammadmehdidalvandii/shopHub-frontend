@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/store/authStore";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
-const API_URL = 'http://localhost:3000/api/orders/';
+const API_URL = 'https://shophubapi.chbk.app/api/orders/';
 
 
 export const useGetOrderByUser = ()=>{

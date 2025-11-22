@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
-const API_URL = 'http://localhost:3000/api/products/';
+const API_URL = 'https://shophubapi.chbk.app/api/products/';
 
 
 export const useCreateProduct = ()=>{

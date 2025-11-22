@@ -2,7 +2,7 @@ import { useAuthStore } from "@/store/authStore";
 import { showSuccess } from "@/utils/Toasts";
 import { useMutation } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
-const API_URL = 'http://localhost:3000/api/auth/';
+const API_URL = 'https://shophubapi.chbk.app/api/auth/';
 
 interface LoginFormData {
     email:string,
