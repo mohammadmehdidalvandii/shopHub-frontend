@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { useUpdatedProfileMutation } from "@/services/profileServices";
 import { useAuthStore } from "@/store/authStore";
-import { showError, showSuccess } from "@/utils/Toasts";
+import { showError, showInfo, showSuccess } from "@/utils/Toasts";
 import { User } from "lucide-react";
 import React, { useState } from "react";
 
@@ -70,11 +70,16 @@ const ProfileInfo: React.FC = () => {
               <User className="h-10 w-10 text-primary" />
             </div>
             <div>
-              <Button variant="default" size="lg">
+              <Button variant="default" size="lg" 
+              disabled
+              >
                 Upload Photo
               </Button>
               <p className="text-lg text-gray-medium mt-2">
                 JPG, PNG or GIF (max. 2MB)
+              </p>
+              <p className="text-lg text-red-700 mt-2">
+                Under Development
               </p>
             </div>
           </div>
