@@ -38,13 +38,14 @@ import { useCartStore } from '@/store/cartStore'
             <div className="container mx-auto px-4">
             <div className="flex items-center justify-between h-16">
                 <Link href='/' className='text-3xl font-robotoBlack font-black text-primary'>ShopHub</Link>
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden lg:flex items-center gap-8">
                     {navLinks.map((link)=>(
                         <Link key={link.href} href={link.href} className= 'font-robotBold text-xl text-text  hover:text-primary transition-colors'>{link.label}</Link>
                     ))}
                 </div>
                 <div className="flex items-center gap-4">
                     <SearchModel/>
+                    <div className='hidden lg:block'>
                     {user?.role  ?(
                      <Link href={user?.role === 'ADMIN' ?'/Admin' :'/Profile'}>
                     <Button variant={user.role ?'outline' :'ghost'} size={user.role ? 'lg' :'sm'}>
@@ -60,6 +61,7 @@ import { useCartStore } from '@/store/cartStore'
                     </Button>
                     </Link>
                     )}
+                    </div>
                     <Link href="/Cart">
                         <Button variant="ghost" size="icon"  className='relative'>
                             <ShoppingCart className='h-5 w-5'/>
@@ -69,7 +71,7 @@ import { useCartStore } from '@/store/cartStore'
                     {/* Mobile menu */}
                     <Sheet open={isOpen} onOpenChange={setIsOpen}> 
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size='icon' className='md:hidden cursor-pointer'>
+                            <Button variant="ghost" size='icon' className='lg:hidden cursor-pointer'>
                                 <Menu className='h-5 w-5'/>
                             </Button>
                         </SheetTrigger>
@@ -77,6 +79,25 @@ import { useCartStore } from '@/store/cartStore'
                             <SheetHeader>
                                 <SheetTitle className='text-left text-primary'>Menu</SheetTitle>
                             </SheetHeader>
+                                                        <div className="flex flex-col gap-4 pt-4 mt-4 border-t border-border">
+                                {user?.role ? (
+                                    <Link href={user?.role === 'ADMIN' ?'/Admin' :'/Profile'}
+                                    onClick={()=>setIsOpen(false)}
+                                    className='flex items-center gap-3 text-text hover:text-primary transition-colors py-2'
+                                >
+                                    <User className='h-5 w-5'/>
+                                    <span className="text-base">{user.firstName}-{user.lastName}</span>
+                                </Link>
+                                ) : (
+                                     <Link href='/auth'
+                                    onClick={()=>setIsOpen(false)}
+                                    className='flex items-center gap-3 text-text hover:text-primary transition-colors py-2'
+                                >
+                                    <User className='h-5 w-5'/>
+                                    <span className="text-base">Account</span>
+                                </Link>
+                                )}
+                            </div>
                             <div className="flex flex-col gap-4 mt-12">
                                 {navLinks.map((link)=>(
                                     <Link key={link.href} href={link.href} className= 'font-robotBold text-xl text-text  hover:text-primary transition-colors'
@@ -84,22 +105,7 @@ import { useCartStore } from '@/store/cartStore'
                                     >{link.label}</Link>
                                 ))}
                             </div>
-                            <div className="flex flex-col gap-4 pt-4 mt-4 border-t border-border">
-                                <Link href='/auth'
-                                    onClick={()=>setIsOpen(false)}
-                                    className='flex items-center gap-3 text-text hover:text-primary transition-colors py-2'
-                                >
-                                    <User className='h-5 w-5'/>
-                                    <span className="text-base">Account</span>
-                                </Link>
-                                <button 
-                                onClick={()=>setIsOpen(false)}
-                                className='flex items-center gap-3 text-text hover:text-primary transition-colors text-left'
-                                >
-                                    <Search className='h-5 w-5'/>
-                                    <span className="text-base">Search</span>
-                                </button>
-                            </div>
+
                         </SheetContent>
                     </Sheet>
                 </div>
