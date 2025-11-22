@@ -26,7 +26,7 @@ const FeaturedProducts:React.FC = ()=>{
             <p className="text-gary-medium text-lg">Handpicked items just for you</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        {data.map((product:any)=>(
+                        {data?.map((product:any)=>(
                         <ProductCard
                             key={product._id}
                             id={product._id}
