@@ -12,9 +12,9 @@ const DashboardActions:React.FC = ()=>{
                 <CardTitle>Quick Actions</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-col-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-col-3 gap-4">
                     <Link href='/Admin/Orders'>
-                        <Button variant='outline' size='lg' className='w-full h-auto py-6'>
+                        <Button variant='outline' size='lg' className='w-full sm:text-sm md:text-2xl h-auto py-6'>
                             <div className="flex flex-col items-center gap-2">
                                 <ShoppingBag className='h-8 w-8'/>
                                 <span>Manage Orders</span>
@@ -22,7 +22,7 @@ const DashboardActions:React.FC = ()=>{
                         </Button>
                     </Link>
                     <Link href='/Admin/Products'>
-                        <Button variant='outline' size='lg' className='w-full h-auto py-6'>
+                        <Button variant='outline' size='lg' className='w-full sm:text-sm md:text-2xl h-auto py-6'>
                             <div className="flex flex-col items-center gap-2">
                                 <Package className='h-8 w-8'/>
                                 <span>Manage Products</span>
@@ -30,7 +30,7 @@ const DashboardActions:React.FC = ()=>{
                         </Button>
                     </Link>
                     <Link href='/Admin/Users'>
-                        <Button variant='outline' size='lg' className='w-full h-auto py-6'>
+                        <Button variant='outline' size='lg' className='w-full sm:text-sm md:text-2xl h-auto py-6'>
                             <div className="flex flex-col items-center gap-2">
                                 <Users className='h-8 w-8'/>
                                 <span>Manage Users</span>

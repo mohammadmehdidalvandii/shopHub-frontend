@@ -18,7 +18,7 @@ const Header:React.FC = ()=>{
             </h1>
             <p className="text-xl text-gray-medium mb-8">Shop the latest trends in electronics, fashion, and lifestyle products</p>
             <div className="flex flex-col sm:flex-row gap-4 ">
-                <Link href='/products'>
+                <Link href='/Products'>
                     <Button size='lg' variant="accent">Shop Now</Button>
                 </Link>
                 <Link href='/Products'>

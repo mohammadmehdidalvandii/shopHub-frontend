@@ -24,11 +24,6 @@ const Login:React.FC = ()=>{
       if (!emailRegex.test(formData.email)){
           return showError('Invalid email format')
       }
-      if(!passwordRegex.test(formData.password)){
-          return showError('Password must be  at least 8 characters and include [A - a - 123 - #$%^&*@!]')
-      }
-
-
 
     loginMutation.mutate(formData,{
       onSuccess:(data)=>{

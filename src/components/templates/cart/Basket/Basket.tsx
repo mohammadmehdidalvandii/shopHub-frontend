@@ -13,7 +13,7 @@ import { useCartStore } from '@/store/cartStore';
 const Basket:React.FC = ()=>{
     const {cart , removeFromCart , clearCart , decreaseQuantity , increaseQuantity} = useCartStore();
 
-    const subtotal = cart.reduce((total , item)=>total + Number(item.price) * (item.quantity || 1),0);
+    const subtotal = cart?.reduce((total , item)=>total + Number(item?.price) * (item?.quantity || 1),0);
     const shipping = 0;
     const tax = subtotal * 0.1;
     const total = subtotal + tax + shipping ;
@@ -24,7 +24,7 @@ const Basket:React.FC = ()=>{
         showSuccess('Delete Product your basket')
     }
     const handlerRemoveAllCart = ()=>{
-        if(cart.length){
+        if(cart?.length){
             clearCart();
             showSuccess('clear All product for basket')
         }else(
@@ -48,23 +48,23 @@ const Basket:React.FC = ()=>{
                     {cart?.length === 0 && (
                     <EmptyCart/> 
                     )}
-                    {cart.map((basket)=>(
-                    <Card  key={basket._id}>
+                    {cart?.map((basket)=>(
+                    <Card  key={basket?._id}>
                         <CardContent className='p-6'>
                             <div className="flex gap-6">
                                 <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-light shrink-0">
-                                    <Image src={basket.images[0]} loading='lazy' alt='basket product' width={200} height={200} className='w-full h-full object-cover'/>
+                                        <Image src={basket?.images} loading='lazy' alt='basket product' width={200} height={200} className='w-full h-full object-cover'/>               
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between mb-2">
                                         <div>
-                                            <h3 className="font-robotoBold font-semibold text-xl">{basket.productName}</h3>
-                                            <p className="text-lg text-gray-medium">{basket.category.title}</p>
+                                            <h3 className="font-robotoBold font-semibold text-xl">{basket?.productName}</h3>
+                                            <p className="text-lg text-gray-medium">{basket?.category?.title}</p>
                                         </div>
                                         <Button
                                         variant="ghost"
                                         size='icon'
-                                        onClick={()=>handlerRemovedCard(basket._id)}
+                                        onClick={()=>handlerRemovedCard(basket?._id)}
                                         ><Trash2 className='h-4 w-4'/>
                                         </Button>
                                     </div>
@@ -73,20 +73,20 @@ const Basket:React.FC = ()=>{
                                             <Button 
                                             variant='outline'
                                             size='icon'
-                                            onClick={()=>handlerDecrease(basket._id)}
+                                            onClick={()=>handlerDecrease(basket?._id)}
                                             >
                                                 <Minus className='h-4 w-4'/>
                                             </Button>
-                                            <span className="w-12 text-center font-semibold">{basket.quantity}</span>
+                                            <span className="w-12 text-center font-semibold">{basket?.quantity}</span>
                                              <Button 
                                             variant='outline'
                                             size='icon'
-                                            onClick={()=>handlerIncrease(basket._id)}
+                                            onClick={()=>handlerIncrease(basket?._id)}
                                             >
                                                 <Plus className='h-4 w-4'/>
                                             </Button>
                                         </div>
-                                        <p className="text-2xl font-robotoBold font-bold text-primary">${basket.price}</p>
+                                        <p className="text-2xl font-robotoBold font-bold text-primary">${basket?.price}</p>
                                     </div>
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ const Categories:React.FC = ()=>{
                 {['Electronics','Audio','Wearables','Accessories'].map((category)=>(
                     <Link 
                         key={category}
-                        href={`/Category/${category.toLowerCase()}`}
+                        href={`/Category/${category}`}
                         className='group'
                     >
                         <div className="bg-white rounded-lg p-8 text-center hover:shadow-lg transition-all duration-300 border  border-border">

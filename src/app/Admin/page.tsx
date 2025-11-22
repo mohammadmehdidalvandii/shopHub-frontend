@@ -17,7 +17,7 @@ const page:React.FC = ()=>{
     <AdminLayout>
       <DashboardHeader/>
       <DashboardStats/>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <DashboardOrders/>
         <DashboardProducts/>
       </div>

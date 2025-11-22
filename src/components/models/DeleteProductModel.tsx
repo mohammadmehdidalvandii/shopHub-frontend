@@ -41,7 +41,7 @@ const DeleteProductModel:React.FC<DeleteProps> = ({id})=>{
                 <AlertDialogAction
                 onClick={()=>handlerDeleteProduct(id)}
                 >
-                    Delete User
+                    Delete Product
                 </AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>

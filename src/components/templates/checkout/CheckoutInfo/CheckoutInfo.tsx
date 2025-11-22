@@ -39,7 +39,7 @@ const CheckoutInfo:React.FC = ()=>{
 
 
 
-    const subtotal = cart.reduce((total , item)=>total + Number(item.price) * (item.quantity || 1),0);
+    const subtotal = cart?.reduce((total , item)=>total + Number(item?.price) * (item?.quantity || 1),0);
     const shipping = 0;
     const tax = subtotal * 0.1;
     const total = subtotal + tax + shipping ;
@@ -47,14 +47,14 @@ const CheckoutInfo:React.FC = ()=>{
     const addOrder = useCreateOrder();
 
     const handlerPayOrder =()=>{
-        if(!cart || cart.length === 0){
+        if(!cart || cart?.length === 0){
             return showError('Basket is empty')
         };
 
         const items = cart?.map((item)=>({
             product:item?._id,
-            quantity:Number(item.quantity),
-            price:Number(item.price)
+            quantity:Number(item?.quantity),
+            price:Number(item?.price)
         }));
 
         const payload ={
@@ -223,10 +223,10 @@ const CheckoutInfo:React.FC = ()=>{
                         </CardHeader>
                         <CardContent className='space-y-4'>
                             <div className="space-y-3">
-                                {cart.map((product)=>(
-                                <div className="flex justify-between text-lg" key={product._id}>
-                                    <span className="text-gray-medium">({product.productName}) x {product.quantity}</span>
-                                    <span className="font-semibold">${(Number(product.price) * Number(product.quantity)).toFixed(2)}</span>
+                                {cart?.map((product)=>(
+                                <div className="flex justify-between text-lg" key={product?._id}>
+                                    <span className="text-gray-medium">({product?.productName}) x {product?.quantity}</span>
+                                    <span className="font-semibold">${(Number(product?.price) * Number(product?.quantity)).toFixed(2)}</span>
                                 </div>
                                 ))}
                             </div>
