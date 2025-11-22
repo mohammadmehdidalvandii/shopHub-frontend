@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/Label'
 import { useLoginMutation } from '@/services/auth'
 import { showError, showSuccess } from '@/utils/Toasts'
 import React, { useState } from 'react'
+import { emailRegex , passwordRegex } from '@/utils/regex'
 
 const Login:React.FC = ()=>{
   const loginMutation = useLoginMutation();
@@ -19,6 +20,16 @@ const Login:React.FC = ()=>{
 
   const handlerLoginForm = (e:React.FormEvent)=>{
     e.preventDefault();
+
+      if (!emailRegex.test(formData.email)){
+          return showError('Invalid email format')
+      }
+      if(!passwordRegex.test(formData.password)){
+          return showError('Password must be  at least 8 characters and include [A - a - 123 - #$%^&*@!]')
+      }
+
+
+
     loginMutation.mutate(formData,{
       onSuccess:(data)=>{
         showSuccess(`Welcome ${data.firstName}-${data.lastName}`);

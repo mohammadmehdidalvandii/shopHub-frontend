@@ -4,8 +4,9 @@ import { Input } from '@/components/ui/Input'
 import { useRegisterMutation } from '@/services/auth'
 import { showError, showSuccess } from '@/utils/Toasts'
 import { Label } from '@radix-ui/react-label'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { nameRegex ,  passwordRegex , emailRegex } from '@/utils/regex'
+
 
 const Register:React.FC = ()=>{
     const registerMutation = useRegisterMutation();
@@ -32,6 +33,22 @@ const Register:React.FC = ()=>{
 
     const handlerSubmitRegister = (e:React.FormEvent)=>{
         e.preventDefault();
+
+        if(!nameRegex.test(formData.firstName)){
+            return showError("First name  must be at least 3 characters")
+        }
+        if(!nameRegex.test(formData.firstName)){
+            return showError("Last name  must be at least 3 characters")
+        }
+
+        if (!emailRegex.test(formData.email)){
+            return showError('Invalid email format')
+        }
+
+        if(!passwordRegex.test(formData.password)){
+            return showError('Password must be  at least 8 characters and include [A - a - 123 - #$%^&*@!]')
+        }
+
         if(formData.password !== formData.confirmPassword){
             return showError('Password and Confirm password do no match');
         };
