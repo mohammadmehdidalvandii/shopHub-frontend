@@ -10,8 +10,8 @@ import { emailRegex , passwordRegex } from '@/utils/regex'
 const Login:React.FC = ()=>{
   const loginMutation = useLoginMutation();
   const [formData, setFormData] = useState({
-    email:'',
-    password:'',
+    email:'admin@gmail.com',
+    password:'Admin7979@',
   });
 
   const handlerChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
