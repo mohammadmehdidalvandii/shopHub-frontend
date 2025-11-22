@@ -9,9 +9,19 @@ import { useCreateOrder } from '@/services/orderServices';
 import { useCartStore } from '@/store/cartStore';
 import { showError, showSuccess } from '@/utils/Toasts';
 import { CreditCard, Lock, Truck } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CheckoutInfo:React.FC = ()=>{
+    
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) return null;
+
+
     const {cart , clearCart} = useCartStore();
     const [customerInfo, setCustomerInfo] =  useState({
         firstName:"",
@@ -41,7 +51,7 @@ const CheckoutInfo:React.FC = ()=>{
             return showError('Basket is empty')
         };
 
-        const items = cart.map((item)=>({
+        const items = cart?.map((item)=>({
             product:item?._id,
             quantity:Number(item.quantity),
             price:Number(item.price)
