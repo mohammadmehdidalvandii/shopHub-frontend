@@ -9,17 +9,9 @@ import { useCreateOrder } from '@/services/orderServices';
 import { useCartStore } from '@/store/cartStore';
 import { showError, showSuccess } from '@/utils/Toasts';
 import { CreditCard, Lock, Truck } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const CheckoutInfo:React.FC = ()=>{
-    
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    if (!isClient) return null;
 
 
     const {cart , clearCart} = useCartStore();
@@ -35,7 +27,7 @@ const CheckoutInfo:React.FC = ()=>{
         country:"",
         orderNote:"",
     });
-    const [paymentMethod , setPaymentMethod] = useState('Credit');
+    const [paymentMethod , setPaymentMethod] = useState('credit');
 
 
 
@@ -81,7 +73,7 @@ const CheckoutInfo:React.FC = ()=>{
                         country: "",
                         orderNote: "",
                     });
-      setPaymentMethod("Credit");
+      setPaymentMethod('credit');
             },
             onError:(error:any)=>{
                 showError(error.message || 'Order Failed ')
@@ -222,14 +214,22 @@ const CheckoutInfo:React.FC = ()=>{
                             <CardTitle>Order Summary</CardTitle>
                         </CardHeader>
                         <CardContent className='space-y-4'>
+                                {(!cart || cart.length === 0) ? (
+                                    <div className='text-center py-10'>
+                                        <p className="text-gray-medium text-2xl font-robotBold font-semibold">
+                                                our cart is empty 🛒
+                                        </p>
+                                    </div>
+                                ) : (
                             <div className="space-y-3">
                                 {cart?.map((product)=>(
                                 <div className="flex justify-between text-lg" key={product?._id}>
                                     <span className="text-gray-medium">({product?.productName}) x {product?.quantity}</span>
                                     <span className="font-semibold">${(Number(product?.price) * Number(product?.quantity)).toFixed(2)}</span>
                                 </div>
-                                ))}
+                                ))}        
                             </div>
+                                )}
                             <div className="border-t border-border pt-4 space-y-2">
                                 <div className="flex justify-between text-lg">
                                     <span className="text-gray-medium">Subtotal</span>
