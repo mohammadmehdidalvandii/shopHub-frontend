@@ -96,9 +96,11 @@ const AddProductModel:React.FC = ()=>{
                         <Input name='brand' id='productBrand' placeholder='e.g.,Sony' required/>
                     </div>
                 </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 block">
                         <Label htmlFor='productDescription'>Description</Label>
-                        <Input name='description' id='productDescription' placeholder='Detailed product description...' className='min-h-[180px]' required/>
+                        <textarea name='description' id='productDescription' placeholder='Detailed product description...' className='w-full min-h-[180px] p-1
+                        rounded-md border mt-2 border-input bg-white px-3 py-2 text-base ring-offset-primary file:bg-transparent file::text-sm file:font-robotoMedium font-semibold file:text-gray-medium placeholder:text-gray-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm
+                        ' required/>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
