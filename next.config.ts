@@ -3,7 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
     images: {
-    domains: ['localhost' , 'shophubapi.chbk.app'], 
+        remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "shophubapi.chbk.app",
+      pathname:"/**"
+    },
+  ],
   },
 };
 
