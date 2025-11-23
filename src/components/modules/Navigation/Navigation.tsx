@@ -89,12 +89,12 @@ import { useCartStore } from '@/store/cartStore'
                                     <span className="text-base">{user.firstName}-{user.lastName}</span>
                                 </Link>
                                 ) : (
-                                     <Link href='/auth'
+                                     <Link href='/Auth'
                                     onClick={()=>setIsOpen(false)}
                                     className='flex items-center gap-3 text-text hover:text-primary transition-colors py-2'
                                 >
                                     <User className='h-5 w-5'/>
-                                    <span className="text-base">Account</span>
+                                    <span className="text-base">Login / Register</span>
                                 </Link>
                                 )}
                             </div>
