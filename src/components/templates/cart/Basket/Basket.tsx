@@ -68,7 +68,7 @@ const Basket:React.FC = ()=>{
                                         ><Trash2 className='h-4 w-4'/>
                                         </Button>
                                     </div>
-                                    <div className="flex items-center justify-between mt-4">
+                                    <div className="flex-col md:flex-row flex items-center justify-between mt-4">
                                         <div className="flex items-center gap-2">
                                             <Button 
                                             variant='outline'
