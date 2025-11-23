@@ -47,12 +47,19 @@ const OrderList: React.FC<OrdersListProps> = ({ orders, error, loading }) => {
     });
   }, [orders, searchItem, statusFilter]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Failed to load orders</p>;
-  }
+    if(loading){
+return  <div className="content_title">
+        <p className="title">Loading Orders...</p>
+      </div>
+    };
+
+    if(error){
+               return (
+              <div className="content_error">
+        <p className="error">Failed to load Orders 😢</p>
+      </div>
+      )
+    };
 
   if (orders.length === 0) {
     return (

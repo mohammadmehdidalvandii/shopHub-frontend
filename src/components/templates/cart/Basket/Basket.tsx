@@ -53,7 +53,7 @@ const Basket:React.FC = ()=>{
                         <CardContent className='p-6'>
                             <div className="flex gap-6">
                                 <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-light shrink-0">
-                                        <Image src={basket?.images} loading='lazy' alt='basket product' width={200} height={200} className='w-full h-full object-cover'/>               
+                                        <Image src={basket?.images} quality={100} alt='basket product' width={200} height={200} className='w-full h-full object-cover'/>               
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex justify-between mb-2">

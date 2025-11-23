@@ -97,7 +97,7 @@ const OrdersAdminModel: React.FC<orderProps> = ({order}) => {
                     <div>
                         <h3 className="font-robotBold font-semibold text-lg mb-4">Shipping Address</h3>
                         <div className="bg-gray-light rounded-lg p-4">
-                            <p className="font-robotoMedium"></p>
+                            <p className="font-robotoMedium">{order.customerInfo.country} <br/> {order.customerInfo.state}-{order.customerInfo.city} | {order.customerInfo.address} </p>
                         </div>
                     </div>
                     <div>

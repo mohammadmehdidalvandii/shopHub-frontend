@@ -66,7 +66,7 @@ const filteredProducts = useMemo(() => {
                                 onClick={()=>handleProductClick(product._id)}
                                 className='w-full flex items-center gap-4 p-3 rounded-lg hover:bg-gray-light transition-colors text-left cursor-pointer'
                                 >   
-                                    <Image src={product.images[0]} alt={product.productName} width={100} height={100}
+                                    <Image src={product.images[0]} quality={100} alt={product.productName} width={100} height={100}
                                     className='w-16 h-16 object-cover rounded-md'
                                     />
                                     <div className="flex-1">

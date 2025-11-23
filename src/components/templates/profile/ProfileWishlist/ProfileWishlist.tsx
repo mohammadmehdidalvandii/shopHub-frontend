@@ -22,13 +22,20 @@ const ProfileWishlist:React.FC = ()=>{
         })
     }
 
-        if(isLoading){
-        return <p>Loading...</p>
+    if(isLoading){
+return  <div className="content_title">
+        <p className="title">Loading Wishlist...</p>
+      </div>
     };
 
     if(isError){
-        return <p>Failed to load Wishlist 😢</p>
+               return (
+              <div className="content_error">
+        <p className="error">Failed to load Wishlist 😢</p>
+      </div>
+      )
     };
+
 
     if(data === null || data.items.length === 0){
         return (

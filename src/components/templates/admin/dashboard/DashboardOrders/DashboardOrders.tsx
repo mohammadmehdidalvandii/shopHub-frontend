@@ -11,13 +11,13 @@ const DashboardOrders:React.FC = ()=>{
     const {data , isError , isLoading} = useGetAllOrders();
             if (isLoading) {
       return  <div className="content_title">
-        <p className="title">Loading products...</p>
+        <p className="title">Loading Orders...</p>
       </div>
     }
     if (isError) {
       return (
               <div className="content_error">
-        <p className="error">Failed to load products</p>
+        <p className="error">Failed to load Orders</p>
       </div>
       )
     }

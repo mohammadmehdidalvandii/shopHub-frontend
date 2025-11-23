@@ -9,13 +9,21 @@ import React from 'react';
 
 const ProfileOrders:React.FC = ()=>{
     const {data , isLoading , isError} = useGetOrderByUser();
-    if(isLoading){
-        return <p>Loading...</p>
+
+        if(isLoading){
+        return  <div className="content_title">
+                 <p className="title">Loading Orders...</p>
+            </div>
     };
 
     if(isError){
-        return <p>Failed to load orders 😢</p>
+               return (
+              <div className="content_error">
+        <p className="error">Failed to load orders 😢</p>
+      </div>
+      )
     };
+
 
     if(data.length === 0){
         return(

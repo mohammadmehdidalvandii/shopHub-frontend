@@ -60,6 +60,7 @@ const ProductCard:React.FC<productProps> = ({id , images , productName , categor
     alt="product name" 
     width={1000} 
     height={1000} 
+    quality={100}
     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 z-0 pointer-events-none"
   />
   <Button
