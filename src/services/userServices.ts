@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { fetchWithAuth } from "./fetchWithAuth";
 import { showError, showSuccess } from "@/utils/Toasts";
-const API_URL = 'https://shophubapi.chbk.app/api/users/';
+const API_URL = 'https://shophubapi.chbk.dev/api/users/';
 
 
 interface UpdatedUser{
