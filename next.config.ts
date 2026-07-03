@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
     {
       protocol: "https",
-      hostname: "shophubapi.chbk.dev",
+      hostname: "https://shop-hub-frontend-pylv9febn-mohammadmehdidalvandiis-projects.vercel.app",
       pathname:"/**"
     },
   ],
