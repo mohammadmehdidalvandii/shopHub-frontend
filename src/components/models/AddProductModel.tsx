@@ -164,7 +164,12 @@ const AddProductModel:React.FC = ()=>{
                         >
                             Cancel
                         </Button>
-                        <Button type='submit' variant='default' size='sm'>Add Product</Button>
+                        <Button type='submit' variant='default' size='sm'
+                            disabled={createProduct.isPending}    
+                        >
+                            {createProduct.isPending ? 'Saving .... ':'Add Product'}
+                            
+                        </Button>
                     </div>
              </form>
         </DialogContent>

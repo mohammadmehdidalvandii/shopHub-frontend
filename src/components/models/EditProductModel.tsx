@@ -149,7 +149,11 @@ const handlerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement
                         >
                         Cancel
                         </Button>    
-                        <Button type='submit' variant='default' size='sm'>UpdateProduct</Button>    
+                        <Button type='submit' variant='default' size='sm'
+                        disabled={updatedProduct.isPending}
+                        >
+                            {updatedProduct.isPending ? 'Editing...':'UpdateProduct'}
+                        </Button>    
                     </div>            
             </form>
         </DialogContent>

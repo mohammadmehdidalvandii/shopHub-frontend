@@ -198,8 +198,10 @@ const EditUserModel: React.FC<IUser> = ({
             >
               Cancel
             </Button>
-            <Button type="submit" variant="default" size="sm">
-              Update User
+            <Button type="submit" variant="default" size="sm"
+            disabled={updataUserMutation.isPending}
+            >
+              {updataUserMutation.isPending ?'updating...':'Update User'}
             </Button>
           </div>
         </form>

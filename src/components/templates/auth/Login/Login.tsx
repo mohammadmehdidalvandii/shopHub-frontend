@@ -67,8 +67,9 @@ const Login:React.FC = ()=>{
         size='lg'
         className='w-full h-12'
         variant='accent'
+        disabled={loginMutation.isPending}
         >
-            Sign In
+          {loginMutation.isPending ? 'Signing in...' :'Sign In'}
         </Button>
     </form>
   )
