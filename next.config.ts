@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
     {
       protocol: "https",
-      hostname: "shophubapi.chbkn.run",
+      hostname: "shophubapi.chbkn.dev",
       pathname:"/**"
     },
   ],

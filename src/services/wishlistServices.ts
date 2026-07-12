@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWithAuth } from "./fetchWithAuth";
 import { useAuthStore } from "@/store/authStore";
 
-const API_URL = 'https://shophubapi.chbkn.run/api/wishlist/';
+const API_URL = 'https://shophubapi.chbkn.dev/api/wishlist/';
 
 export  const useAddToWishlist = ()=>{
     const {user} = useAuthStore.getState();
